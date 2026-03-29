@@ -63,9 +63,9 @@ export default function ProfilePage() {
             </h3>
             <div className="mt-4 p-4 rounded-xl bg-warm-50 flex items-center justify-between">
               <div>
-                <p className="font-semibold text-warm-800 text-lg">Rooted Tier</p>
+                <p className="font-semibold text-warm-800 text-lg">TransformHER Tier</p>
                 <p className="text-sm text-warm-400 font-[family-name:var(--font-body)]">
-                  $39/month &middot; Next billing: April 15, 2026
+                  $47.97/month &middot; Next billing: April 15, 2026
                 </p>
               </div>
               <span className="px-3 py-1 rounded-full bg-sage-100 text-sage-500 text-xs font-semibold uppercase tracking-wider font-[family-name:var(--font-body)]">
@@ -74,7 +74,7 @@ export default function ProfilePage() {
             </div>
             <div className="mt-4 flex gap-3">
               <Button variant="outline" size="sm">
-                <ArrowUpRight className="h-4 w-4" /> Upgrade to Whole
+                <ArrowUpRight className="h-4 w-4" /> Upgrade to AscendHER
               </Button>
               <Button variant="ghost" size="sm">
                 Manage Billing
@@ -89,9 +89,9 @@ export default function ProfilePage() {
             </h3>
             <div className="mt-4 space-y-3">
               {[
-                { date: "Mar 15, 2026", amount: "$39.00", status: "Paid" },
-                { date: "Feb 15, 2026", amount: "$39.00", status: "Paid" },
-                { date: "Jan 15, 2026", amount: "$39.00", status: "Paid" },
+                { date: "Mar 15, 2026", amount: "$47.97", status: "Paid" },
+                { date: "Feb 15, 2026", amount: "$47.97", status: "Paid" },
+                { date: "Jan 15, 2026", amount: "$47.97", status: "Paid" },
               ].map((bill) => (
                 <div
                   key={bill.date}
@@ -102,7 +102,7 @@ export default function ProfilePage() {
                       {bill.date}
                     </p>
                     <p className="text-xs text-warm-400 font-[family-name:var(--font-body)]">
-                      OvercomeHER Circle — Rooted
+                      OvercomeHER Circle — TransformHER
                     </p>
                   </div>
                   <div className="text-right">

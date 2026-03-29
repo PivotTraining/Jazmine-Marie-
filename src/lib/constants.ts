@@ -1,41 +1,3 @@
-// ============================================================
-// PROJECT DOCUMENTATION
-// ============================================================
-//
-// PROJECT VISION
-// Jazmine Marie's website is a unified digital home that positions her
-// as a trusted voice in women's wellness, healing, and transformation.
-// OvercomeHER Circle lives as an integrated community section — not a
-// separate brand — creating a seamless journey from discovery to deep
-// membership engagement. The site communicates warmth, authority, and
-// emotional intelligence at every touchpoint.
-//
-// BRAND ARCHITECTURE
-// Parent Brand: Jazmine Marie — Host, Speaker, Women's Wellness Voice
-// Sub-Brand: OvercomeHER Circle — The membership community and movement
-// Relationship: OvercomeHER is Jazmine's signature community offering,
-// nested within her personal brand. It carries its own visual identity
-// (logo, accent colors) but inherits the parent brand's typography,
-// tone, and design system.
-//
-// USER JOURNEYS
-// 1. Visitor → Speaking Inquiry: Home → Speaking → Inquiry Form → Confirmation
-// 2. Visitor → Member: Home → OvercomeHER → Membership → Checkout → Dashboard
-// 3. Member → Content: Login → Dashboard → Room → Discussion/Resource
-// 4. Member → Upgrade: Dashboard → Profile → Upgrade → Checkout → Enhanced Access
-//
-// DATABASE SCHEMA (Supabase/PostgreSQL)
-// - profiles: id, email, full_name, avatar_url, bio, created_at
-// - memberships: id, user_id, tier_id, stripe_subscription_id, status, current_period_end
-// - tiers: id, name, slug, description, price_monthly, price_yearly, stripe_price_id_monthly, stripe_price_id_yearly, features, sort_order
-// - rooms: id, name, slug, description, type, tier_required, icon, sort_order
-// - posts: id, room_id, author_id, title, content, pinned, created_at
-// - comments: id, post_id, author_id, content, created_at
-// - resources: id, title, description, type, url, tier_required, room_id, created_at
-// - events: id, title, description, date, duration, type, tier_required, recording_url
-// - speaking_inquiries: id, name, email, organization, event_type, date, audience_size, message, created_at
-// ============================================================
-
 export const SITE_NAME = "Jazmine Marie";
 export const SITE_TAGLINE = "Host. Speaker. Healing Advocate.";
 export const SITE_DESCRIPTION =
@@ -54,65 +16,79 @@ export const NAV_LINKS = [
 
 export const MEMBERSHIP_TIERS = [
   {
-    id: "bloom",
-    name: "Bloom",
-    tagline: "Where your healing journey begins",
+    id: "nurturher",
+    name: "NurturHER",
+    tagline: "A gentle, self-paced entry into your healing journey",
     description:
-      "For the woman ready to stop surviving and start growing. Bloom gives you a seat at the table — access to community, encouragement, and curated content to help you take your first brave steps.",
-    priceMonthly: 19,
-    priceYearly: 190,
+      "For the woman who's just getting started on her growth journey. NurturHER gives you structure without pressure — a soft space to stay encouraged and consistent.",
+    priceMonthly: 19.97,
+    priceYearly: 199,
     features: [
-      "Welcome Room access",
-      "Monthly Theme Room",
-      "Prayer & Encouragement Room",
-      "Announcements & community updates",
+      "Monthly healing theme + journaling prompts",
+      "Access to community support spaces",
+      "Guided challenges for building habits",
+      "Entry to the ReadHER Book Club",
       "Monthly group gathering (virtual)",
-      "Curated resource library (starter)",
+    ],
+    perfectFor: [
+      "Are just getting started on your growth journey",
+      "Want structure without pressure",
+      "Need a soft space to stay encouraged & consistent",
     ],
     highlighted: false,
-    cta: "Start Blooming",
+    cta: "Join NurturHER",
+    trialText: "7-day free trial",
   },
   {
-    id: "rooted",
-    name: "Rooted",
-    tagline: "Go deeper. Grow stronger.",
+    id: "transformher",
+    name: "TransformHER",
+    tagline: "For the woman who's doing the work and ready for more",
     description:
-      "For the woman who is ready to do the real work — journaling, healing conversations, book club discussions, and deeper community connection. Rooted is where transformation takes hold.",
-    priceMonthly: 39,
-    priceYearly: 390,
+      "You're beyond surface-level. You learn best in community and guided conversation. TransformHER gives you consistency, structure, and deeper self-discovery.",
+    priceMonthly: 47.97,
+    priceYearly: 479,
     features: [
-      "Everything in Bloom, plus:",
-      "Journaling & Reflection Room",
-      "Healing Conversations Room",
-      "Book Club / Devotional Room",
-      "Teaching replay library (full access)",
-      "Monthly live workshop or teaching",
-      "Moms / Marriage / Womanhood room",
+      "Everything in NurturHER, plus:",
+      "Monthly Live Community Sessions",
+      "Guided group reflection + intentional conversation",
+      "Weekly journal prompts + accountability check-ins",
+      "Integration activities + practice space",
       "Priority event access",
     ],
+    perfectFor: [
+      "Are ready to move beyond surface-level healing",
+      "Learn best in community and guided conversation",
+      "Crave consistency, structure, and deeper self-discovery",
+      "Want to stay accountable to your own evolution",
+    ],
     highlighted: true,
-    cta: "Get Rooted",
+    cta: "Join TransformHER",
+    trialText: "7-day free trial",
   },
   {
-    id: "whole",
-    name: "Whole",
-    tagline: "Step fully into who you were made to be",
+    id: "ascendher",
+    name: "AscendHER",
+    tagline: "High-touch coaching, deep transformation, intimate access",
     description:
-      "For the woman who wants the full experience — intimate group mentorship, exclusive events, direct access to Jazmine, and every resource the community offers. Whole is the invitation to become.",
-    priceMonthly: 79,
-    priceYearly: 790,
+      "You're ready to move beyond survival and step fully into your power. AscendHER is for women who want hands-on guidance, spiritual alignment, and next-level breakthroughs.",
+    priceMonthly: 97,
+    priceYearly: 970,
     features: [
-      "Everything in Rooted, plus:",
-      "Small-group mentorship sessions",
-      "Quarterly 1-on-1 check-in with Jazmine",
-      "Exclusive Whole-tier events & retreats info",
-      "Early access to all new content",
-      "Private accountability partnerships",
-      "Full resource & workshop archive",
+      "Everything in TransformHER, plus:",
+      "Live Coaching with Jazmine + Chris Marvel",
+      "Private coaching community for direct support",
+      "Hot seat coaching + Q&A sessions",
+      "Exclusive Deep Work exercises & assignments",
       "VIP access to live events",
     ],
+    perfectFor: [
+      "Are ready to move beyond survival and step fully into your power",
+      "Want hands-on guidance & spiritual alignment",
+      "Crave deep accountability and next-level breakthroughs",
+    ],
     highlighted: false,
-    cta: "Become Whole",
+    cta: "Join AscendHER",
+    trialText: "7-day free trial",
   },
 ] as const;
 
@@ -122,7 +98,7 @@ export const COMMUNITY_ROOMS = [
     slug: "welcome",
     description: "Introduce yourself and get welcomed into the community.",
     type: "discussion",
-    tierRequired: "bloom",
+    tierRequired: "nurturher",
     icon: "Heart",
   },
   {
@@ -130,7 +106,7 @@ export const COMMUNITY_ROOMS = [
     slug: "monthly-theme",
     description: "Each month we explore a new healing or growth theme together.",
     type: "discussion",
-    tierRequired: "bloom",
+    tierRequired: "nurturher",
     icon: "Sparkles",
   },
   {
@@ -138,15 +114,23 @@ export const COMMUNITY_ROOMS = [
     slug: "prayer-encouragement",
     description: "A sacred space to share prayer requests and uplift one another.",
     type: "discussion",
-    tierRequired: "bloom",
+    tierRequired: "nurturher",
     icon: "HandHeart",
+  },
+  {
+    name: "ReadHER Book Club",
+    slug: "book-club",
+    description: "Monthly reads and devotional studies for soul-deep growth. Currently reading: The Let Them Theory by Mel Robbins.",
+    type: "discussion",
+    tierRequired: "nurturher",
+    icon: "BookMarked",
   },
   {
     name: "Journaling & Reflection",
     slug: "journaling",
-    description: "Guided prompts and space for deep personal reflection.",
+    description: "Guided prompts and space for deep personal reflection. Your journal is your mirror.",
     type: "discussion",
-    tierRequired: "rooted",
+    tierRequired: "transformher",
     icon: "BookOpen",
   },
   {
@@ -154,23 +138,15 @@ export const COMMUNITY_ROOMS = [
     slug: "healing-conversations",
     description: "Real talk about real healing — shame, guilt, identity, and becoming.",
     type: "discussion",
-    tierRequired: "rooted",
+    tierRequired: "transformher",
     icon: "MessageCircle",
-  },
-  {
-    name: "Book Club & Devotional",
-    slug: "book-club",
-    description: "Monthly reads and devotional studies for soul-deep growth.",
-    type: "discussion",
-    tierRequired: "rooted",
-    icon: "BookMarked",
   },
   {
     name: "Teaching Replays",
     slug: "replays",
     description: "Full library of past workshops, teachings, and live session recordings.",
     type: "library",
-    tierRequired: "rooted",
+    tierRequired: "transformher",
     icon: "Play",
   },
   {
@@ -178,7 +154,7 @@ export const COMMUNITY_ROOMS = [
     slug: "moms-marriage-womanhood",
     description: "For the woman navigating motherhood, marriage, and identity.",
     type: "discussion",
-    tierRequired: "rooted",
+    tierRequired: "transformher",
     icon: "Users",
   },
   {
@@ -186,7 +162,7 @@ export const COMMUNITY_ROOMS = [
     slug: "announcements",
     description: "Community news, upcoming events, and important updates.",
     type: "announcement",
-    tierRequired: "bloom",
+    tierRequired: "nurturher",
     icon: "Megaphone",
   },
   {
@@ -194,7 +170,7 @@ export const COMMUNITY_ROOMS = [
     slug: "events",
     description: "Upcoming live gatherings, workshops, and special events.",
     type: "events",
-    tierRequired: "bloom",
+    tierRequired: "nurturher",
     icon: "Calendar",
   },
 ] as const;
@@ -211,8 +187,24 @@ export const SIGNATURE_TOPICS = [
 ] as const;
 
 export const SOCIAL_LINKS = {
-  instagram: "https://instagram.com/jazminemarie",
+  instagram: "https://instagram.com/MRSJazmineMarie",
   facebook: "https://facebook.com/jazminemarie",
   youtube: "https://youtube.com/@jazminemarie",
   tiktok: "https://tiktok.com/@jazminemarie",
+  overcomeher_ig: "https://instagram.com/IAMANOVERCOMEHER",
+} as const;
+
+export const IMAGES = {
+  overcomeherLogo: "/images/overcomeher-logo.png",
+  overcomeherLogoAlt: "/images/overcomeher-logo-alt.png",
+  pinkBrushLogo: "/images/pink-brush-logo.png",
+  jazmineSpeaker: "/images/jazmine-speaker.jpg",
+  jazmineHeadshot: "/images/jazmine-headshot.jpg",
+  eventGalentines1: "/images/event-galentines-1.jpg",
+  eventGalentines2: "/images/event-galentines-2.jpg",
+  eventGalentines3: "/images/event-galentines-3.jpg",
+  conference1: "/images/conference-2022-1.jpg",
+  conference2: "/images/conference-2022-2.jpg",
+  conference3: "/images/conference-2022-3.jpg",
+  conference4: "/images/conference-2022-4.jpg",
 } as const;

@@ -21,63 +21,63 @@ const resources = [
   {
     title: "The Power of Vulnerability — Full Teaching",
     type: "video",
-    tier: "rooted",
+    tier: "transformher",
     date: "March 2026",
     duration: "52 min",
   },
   {
     title: "The Recharge Method Workshop",
     type: "video",
-    tier: "rooted",
+    tier: "transformher",
     date: "February 2026",
     duration: "45 min",
   },
   {
     title: "Healing Practices That Will Change Your Life",
     type: "video",
-    tier: "bloom",
+    tier: "nurturher",
     date: "January 2026",
     duration: "38 min",
   },
   {
     title: "Monthly Journaling Prompts — March",
     type: "worksheet",
-    tier: "rooted",
+    tier: "transformher",
     date: "March 2026",
     duration: "PDF",
   },
   {
     title: "Self-Trust Assessment Guide",
     type: "worksheet",
-    tier: "bloom",
+    tier: "nurturher",
     date: "February 2026",
     duration: "PDF",
   },
   {
     title: "Guided Meditation: Releasing Guilt",
     type: "audio",
-    tier: "whole",
+    tier: "ascendher",
     date: "March 2026",
     duration: "18 min",
   },
   {
     title: "Overcoming Limiting Beliefs Workbook",
     type: "worksheet",
-    tier: "rooted",
+    tier: "transformher",
     date: "January 2026",
     duration: "PDF",
   },
   {
     title: "OvercomeHER Conference 2025 — Full Replay",
     type: "video",
-    tier: "whole",
+    tier: "ascendher",
     date: "December 2025",
     duration: "3 hr 20 min",
   },
   {
     title: "Prayer & Affirmation Audio Set",
     type: "audio",
-    tier: "bloom",
+    tier: "nurturher",
     date: "November 2025",
     duration: "25 min",
   },
@@ -134,7 +134,7 @@ export default function LibraryPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {resources.map((resource) => {
             const Icon = typeIcons[resource.type] || FileText;
-            const accessible = resource.tier !== "whole"; // Demo: rooted user
+            const accessible = resource.tier !== "ascendher"; // Demo: TransformHER user
             return (
               <div
                 key={resource.title}
@@ -180,7 +180,7 @@ export default function LibraryPage() {
                 </div>
                 {!accessible && (
                   <p className="mt-3 text-xs text-plum-400 font-[family-name:var(--font-body)]">
-                    Upgrade to Whole tier to access
+                    Upgrade to AscendHER to access
                   </p>
                 )}
               </div>

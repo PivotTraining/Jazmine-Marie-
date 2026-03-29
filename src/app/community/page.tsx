@@ -51,7 +51,7 @@ export default function CommunityDashboard() {
                 OvercomeHER Circle
               </h1>
               <p className="mt-1 text-warm-300 font-[family-name:var(--font-body)]">
-                You&apos;re in the <span className="text-blush-300 font-medium">Rooted</span> tier
+                You&apos;re in the <span className="text-blush-300 font-medium">TransformHER</span> tier
               </p>
             </div>
             <div className="flex gap-3">
@@ -104,13 +104,13 @@ export default function CommunityDashboard() {
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold text-warm-800">Your Rooms</h2>
           <span className="text-sm text-warm-400 font-[family-name:var(--font-body)]">
-            Rooted tier access
+            TransformHER tier access
           </span>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {COMMUNITY_ROOMS.map((room) => {
             const Icon = iconMap[room.icon] || MessageCircle;
-            const accessible = room.tierRequired === "bloom" || room.tierRequired === "rooted";
+            const accessible = room.tierRequired === "nurturher" || room.tierRequired === "transformher";
             return (
               <Link
                 key={room.slug}
@@ -127,7 +127,7 @@ export default function CommunityDashboard() {
                   </div>
                   {!accessible && (
                     <span className="text-[10px] font-medium uppercase tracking-wider text-warm-400 bg-warm-100 px-2 py-1 rounded-full font-[family-name:var(--font-body)]">
-                      Whole tier
+                      AscendHER tier
                     </span>
                   )}
                 </div>
@@ -163,13 +163,13 @@ export default function CommunityDashboard() {
               title: "Book Club Discussion: Chapter 4-6",
               date: "April 18, 2026 at 8:00 PM EST",
               type: "Book Club",
-              tier: "Rooted+",
+              tier: "TransformHER+",
             },
             {
               title: "Healing Circle: Processing Grief & Loss",
               date: "April 25, 2026 at 6:30 PM EST",
               type: "Small Group",
-              tier: "Whole",
+              tier: "AscendHER",
             },
           ].map((event) => (
             <div

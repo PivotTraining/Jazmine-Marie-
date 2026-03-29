@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   Mic,
   Users,
@@ -10,7 +11,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Section } from "@/components/ui/section";
-import { SIGNATURE_TOPICS } from "@/lib/constants";
+import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
+import { SIGNATURE_TOPICS, IMAGES } from "@/lib/constants";
 import { SpeakingInquiryForm } from "./inquiry-form";
 
 export const metadata: Metadata = {
@@ -73,13 +75,14 @@ export default function SpeakingPage() {
       {/* Speaker Bio */}
       <Section variant="warm" size="lg">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-blush-100 via-warm-100 to-plum-100 flex items-center justify-center shadow-xl order-2 lg:order-1">
-            <div className="text-center p-8">
-              <Mic className="h-20 w-20 text-warm-400 mx-auto mb-4" />
-              <p className="text-warm-400 text-sm font-[family-name:var(--font-body)]">
-                Jazmine speaking photo
-              </p>
-            </div>
+          <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl order-2 lg:order-1">
+            <Image
+              src={IMAGES.jazmineSpeaker}
+              alt="Jazmine Marie speaking at an event"
+              width={600}
+              height={750}
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="order-1 lg:order-2">
             <h2 className="text-4xl md:text-5xl font-semibold text-warm-900 leading-tight">
@@ -164,27 +167,28 @@ export default function SpeakingPage() {
         </div>
       </Section>
 
-      {/* Event Photos Placeholder */}
+      {/* Event Photos */}
       <Section variant="warm" size="md">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {[
-            "Conference keynote",
-            "Women's retreat",
-            "Panel discussion",
-            "Workshop facilitation",
-            "Community gathering",
-            "Virtual event",
-          ].map((label) => (
+            { src: IMAGES.conference1, alt: "OvercomeHER conference" },
+            { src: IMAGES.eventGalentines1, alt: "Women's gathering" },
+            { src: IMAGES.conference2, alt: "Panel discussion" },
+            { src: IMAGES.eventGalentines2, alt: "Workshop facilitation" },
+            { src: IMAGES.conference3, alt: "Community event" },
+            { src: IMAGES.eventGalentines3, alt: "Live event" },
+          ].map((img) => (
             <div
-              key={label}
-              className="aspect-video rounded-2xl bg-gradient-to-br from-warm-200 to-blush-100 flex items-center justify-center"
+              key={img.alt}
+              className="aspect-video rounded-2xl overflow-hidden"
             >
-              <div className="text-center">
-                <Calendar className="h-8 w-8 text-warm-400 mx-auto mb-2" />
-                <p className="text-warm-400 text-sm font-[family-name:var(--font-body)]">
-                  {label}
-                </p>
-              </div>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={600}
+                height={340}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
             </div>
           ))}
         </div>

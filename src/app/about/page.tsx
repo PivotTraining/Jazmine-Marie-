@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Heart, ArrowRight, Sparkles, BookOpen, Users, Mic } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
+import { IMAGES } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "About Jazmine Marie",
@@ -17,82 +20,92 @@ export default function AboutPage() {
       <section className="bg-warm-50">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <p className="text-sm uppercase tracking-[0.25em] text-plum-400 font-[family-name:var(--font-body)] font-medium">
-                My Story
-              </p>
-              <h1 className="mt-4 text-5xl md:text-6xl font-semibold text-warm-900 leading-tight">
-                I know what it feels like to{" "}
-                <span className="italic text-blush-400">carry it all</span>
-              </h1>
-              <p className="mt-6 text-lg text-warm-500 leading-relaxed font-[family-name:var(--font-body)]">
-                I&apos;m Jazmine Marie — a woman who had to learn the hard way that
-                being strong and being whole are not the same thing.
-              </p>
-            </div>
-            {/* Photo placeholder */}
-            <div className="aspect-[3/4] rounded-3xl bg-gradient-to-br from-blush-100 via-warm-100 to-plum-100 flex items-center justify-center shadow-xl">
-              <div className="text-center p-8">
-                <Heart className="h-20 w-20 text-warm-400 mx-auto mb-4" />
-                <p className="text-warm-400 text-sm font-[family-name:var(--font-body)]">
-                  Jazmine Marie photo
+            <AnimateOnScroll animation="fade-up">
+              <div>
+                <p className="text-sm uppercase tracking-[0.25em] text-plum-400 font-[family-name:var(--font-body)] font-medium">
+                  My Story
+                </p>
+                <h1 className="mt-4 text-5xl md:text-6xl font-semibold text-warm-900 leading-tight">
+                  I know what it feels like to{" "}
+                  <span className="italic text-blush-400">carry it all</span>
+                </h1>
+                <p className="mt-6 text-lg text-warm-500 leading-relaxed font-[family-name:var(--font-body)]">
+                  I&apos;m Jazmine Marie — a woman who had to learn the hard way that
+                  being strong and being whole are not the same thing.
                 </p>
               </div>
-            </div>
+            </AnimateOnScroll>
+            <AnimateOnScroll animation="fade-up" delay={200}>
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-xl">
+                <Image
+                  src={IMAGES.jazmineHeadshot}
+                  alt="Jazmine Marie"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>
 
       {/* Story */}
       <Section variant="default" size="lg">
-        <div className="max-w-3xl mx-auto">
-          <div className="prose prose-lg font-[family-name:var(--font-body)] text-warm-600 leading-relaxed space-y-6">
-            <p>
-              For years, I was the woman who held everything together — the marriage,
-              the motherhood, the career, the friendships, the faith. And I did it
-              well. From the outside, it looked like I had it all figured out. But
-              inside? I was exhausted. Disconnected. Running on fumes and calling it
-              strength.
-            </p>
-            <p>
-              My healing journey didn&apos;t start with a breakthrough. It started with a
-              breakdown. The kind that forces you to ask the questions you&apos;ve been
-              avoiding: <em>Who am I when I stop performing? What am I carrying that was
-              never mine to hold? Where did I lose myself — and can I find her again?</em>
-            </p>
-            <p>
-              That journey led me to do the deep work — therapy, journaling,
-              faith-based healing, and community. And what I discovered changed
-              everything: <strong>wholeness isn&apos;t something you achieve. It&apos;s something
-              you become, one brave choice at a time.</strong>
-            </p>
-            <p>
-              I started sharing my story because I realized I wasn&apos;t the only one.
-              There were women everywhere — mothers, wives, leaders, caregivers —
-              who were carrying so much internally that they&apos;d forgotten what it
-              felt like to breathe. To be soft. To be honest. To ask for help.
-            </p>
-            <p>
-              That&apos;s why I created OvercomeHER Circle — a space where women don&apos;t
-              have to perform. Where healing is the point, not the side effect.
-              Where we do the work together, and we hold each other up while we
-              do it.
-            </p>
+        <AnimateOnScroll animation="fade-up">
+          <div className="max-w-3xl mx-auto">
+            <div className="prose prose-lg font-[family-name:var(--font-body)] text-warm-600 leading-relaxed space-y-6">
+              <p>
+                I created OvercomeHER Circle because I am her. The woman who looked
+                strong on the outside but was carrying way too much alone. The one who
+                knew healing mattered — but didn&apos;t always have the structure, the
+                support, or the safe space to make it happen.
+              </p>
+              <p>
+                I&apos;ve spent years doing the inner work, studying healing, leading
+                women, and creating spaces that don&apos;t just feel good — they create
+                change. And what I&apos;ve learned is this: You don&apos;t need to hustle
+                your way to healing. You don&apos;t need to do it all by yourself. You
+                just need a space that holds you while you grow.
+              </p>
+              <p>
+                That&apos;s what OvercomeHER is. A space for accountability, clarity,
+                sisterhood, and softness — all in one. I&apos;m still on this journey
+                too. But I&apos;m not walking it alone anymore — and you don&apos;t have
+                to either.
+              </p>
+              <p>
+                Jazmine Marie Davis is an educator, mentor, and emotional wellness
+                advocate with a Bachelor&apos;s in Human Development and Family Science
+                and a Master&apos;s in Education focused on Culturally Relevant Pedagogy.
+                She is the founder of OvercomeHER, a healing-centered women&apos;s
+                community, and co-founder of PIVOT, a mental wellness training company.
+              </p>
+              <p>
+                As a mom of three, Jazmine is passionate about creating safe spaces for
+                women to develop confidence, character, and wholeness. She specializes
+                in identity, emotional intelligence, boundaries, and self-care — and has
+                led impactful sessions in schools, nonprofits, and corporate spaces.
+              </p>
+            </div>
           </div>
-        </div>
+        </AnimateOnScroll>
       </Section>
 
       {/* Values */}
       <Section variant="warm" size="lg">
-        <div className="text-center mb-16">
-          <p className="text-sm uppercase tracking-[0.25em] text-plum-400 font-[family-name:var(--font-body)] font-medium">
-            What I Believe
-          </p>
-          <h2 className="mt-4 text-4xl md:text-5xl font-semibold text-warm-900">
-            The values that guide{" "}
-            <span className="italic text-blush-400">everything</span>
-          </h2>
-        </div>
+        <AnimateOnScroll animation="fade-up">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.25em] text-plum-400 font-[family-name:var(--font-body)] font-medium">
+              What I Believe
+            </p>
+            <h2 className="mt-4 text-4xl md:text-5xl font-semibold text-warm-900">
+              The values that guide{" "}
+              <span className="italic text-blush-400">everything</span>
+            </h2>
+          </div>
+        </AnimateOnScroll>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
@@ -131,62 +144,77 @@ export default function AboutPage() {
               description:
                 "The journey matters as much as the destination. I celebrate where you are now while holding space for who you're becoming.",
             },
-          ].map((value) => (
-            <div
-              key={value.title}
-              className="p-8 rounded-2xl bg-white hover:shadow-lg transition-all duration-300"
-            >
-              <value.icon className="h-8 w-8 text-blush-400" />
-              <h3 className="mt-4 text-xl font-semibold text-warm-800">
-                {value.title}
-              </h3>
-              <p className="mt-2 text-warm-500 font-[family-name:var(--font-body)] leading-relaxed">
-                {value.description}
-              </p>
-            </div>
+          ].map((value, index) => (
+            <AnimateOnScroll key={value.title} animation="fade-up" delay={index * 100}>
+              <div className="p-8 rounded-2xl bg-white hover:shadow-lg transition-all duration-300">
+                <value.icon className="h-8 w-8 text-blush-400" />
+                <h3 className="mt-4 text-xl font-semibold text-warm-800">
+                  {value.title}
+                </h3>
+                <p className="mt-2 text-warm-500 font-[family-name:var(--font-body)] leading-relaxed">
+                  {value.description}
+                </p>
+              </div>
+            </AnimateOnScroll>
           ))}
         </div>
       </Section>
 
-      {/* Photo Gallery Placeholder */}
+      {/* Photo Gallery */}
       <Section variant="default" size="md">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="aspect-square rounded-2xl bg-gradient-to-br from-warm-100 to-blush-100 flex items-center justify-center"
-            >
-              <p className="text-warm-400 text-sm font-[family-name:var(--font-body)]">
-                Gallery Photo {i}
-              </p>
-            </div>
-          ))}
-        </div>
+        <AnimateOnScroll animation="fade-up">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { src: IMAGES.conference1, alt: "Conference 2022" },
+              { src: IMAGES.conference2, alt: "Conference speaking session" },
+              { src: IMAGES.conference3, alt: "Conference workshop" },
+              { src: IMAGES.conference4, alt: "Conference community" },
+              { src: IMAGES.eventGalentines1, alt: "Galentines event" },
+              { src: IMAGES.eventGalentines2, alt: "Galentines gathering" },
+              { src: IMAGES.eventGalentines3, alt: "Galentines celebration" },
+            ].map((photo, index) => (
+              <div
+                key={index}
+                className="relative aspect-square rounded-2xl overflow-hidden"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
+        </AnimateOnScroll>
       </Section>
 
       {/* CTA */}
       <Section variant="warm" size="lg">
-        <div className="text-center">
-          <h2 className="text-4xl md:text-5xl font-semibold text-warm-900">
-            Ready to <span className="italic text-blush-400">connect</span>?
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-warm-500 font-[family-name:var(--font-body)]">
-            Whether you want to join the OvercomeHER community or book me for
-            your next event, I&apos;d love to hear from you.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/overcomeher">
-              <Button variant="primary" size="lg">
-                Join OvercomeHER <ArrowRight className="h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/speaking">
-              <Button variant="outline" size="lg">
-                Book Me to Speak
-              </Button>
-            </Link>
+        <AnimateOnScroll animation="fade-up">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-semibold text-warm-900">
+              Ready to <span className="italic text-blush-400">connect</span>?
+            </h2>
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-warm-500 font-[family-name:var(--font-body)]">
+              Whether you want to join the OvercomeHER community or book me for
+              your next event, I&apos;d love to hear from you.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Link href="/overcomeher">
+                <Button variant="primary" size="lg">
+                  Join OvercomeHER <ArrowRight className="h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/speaking">
+                <Button variant="outline" size="lg">
+                  Book Me to Speak
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
+        </AnimateOnScroll>
       </Section>
     </>
   );
