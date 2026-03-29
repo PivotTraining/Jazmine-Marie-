@@ -55,7 +55,7 @@ export default function HomePage() {
             <div className="hidden lg:block">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src={IMAGES.jazmineSpeaker}
+                  src={IMAGES.jazmineJournaling}
                   alt="Jazmine Marie — Speaker and Healing Advocate"
                   fill
                   className="object-cover"
@@ -192,7 +192,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.conference1}
+                  src={IMAGES.eventRoom}
                   alt="OvercomeHER community event"
                   width={400}
                   height={400}
@@ -201,7 +201,7 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.eventGalentines1}
+                  src={IMAGES.jazmineSpeakingBlue}
                   alt="Women's gathering event"
                   width={400}
                   height={400}
@@ -210,7 +210,7 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.eventGalentines2}
+                  src={IMAGES.womenEmbrace}
                   alt="Community sisterhood"
                   width={400}
                   height={400}
@@ -219,7 +219,7 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.conference2}
+                  src={IMAGES.womenCircle}
                   alt="OvercomeHER conference"
                   width={400}
                   height={400}
@@ -324,8 +324,8 @@ export default function HomePage() {
             <div className="hidden lg:grid grid-cols-2 gap-4">
               <div className="rounded-2xl overflow-hidden aspect-[3/4]">
                 <Image
-                  src={IMAGES.conference3}
-                  alt="Jazmine at conference"
+                  src={IMAGES.jazmineShameTalk}
+                  alt="Jazmine presenting on overcoming shame"
                   width={400}
                   height={530}
                   className="w-full h-full object-cover"
@@ -333,8 +333,8 @@ export default function HomePage() {
               </div>
               <div className="rounded-2xl overflow-hidden aspect-[3/4] mt-8">
                 <Image
-                  src={IMAGES.eventGalentines3}
-                  alt="Women's event"
+                  src={IMAGES.jazmineHosting}
+                  alt="Jazmine hosting workshop"
                   width={400}
                   height={530}
                   className="w-full h-full object-cover"

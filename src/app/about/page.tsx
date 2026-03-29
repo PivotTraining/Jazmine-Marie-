@@ -38,7 +38,7 @@ export default function AboutPage() {
             <AnimateOnScroll animation="fade-up" delay={200}>
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-xl">
                 <Image
-                  src={IMAGES.jazmineHeadshot}
+                  src={IMAGES.jazmineLaptopRed}
                   alt="Jazmine Marie"
                   fill
                   className="object-cover"
@@ -165,13 +165,13 @@ export default function AboutPage() {
         <AnimateOnScroll animation="fade-up">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { src: IMAGES.conference1, alt: "Conference 2022" },
-              { src: IMAGES.conference2, alt: "Conference speaking session" },
-              { src: IMAGES.conference3, alt: "Conference workshop" },
-              { src: IMAGES.conference4, alt: "Conference community" },
-              { src: IMAGES.eventGalentines1, alt: "Galentines event" },
-              { src: IMAGES.eventGalentines2, alt: "Galentines gathering" },
-              { src: IMAGES.eventGalentines3, alt: "Galentines celebration" },
+              { src: IMAGES.eventRoom, alt: "Conference ballroom event" },
+              { src: IMAGES.eventWorkshop, alt: "Workshop with women" },
+              { src: IMAGES.jazmineShameTalk, alt: "Jazmine presenting on overcoming shame" },
+              { src: IMAGES.eventWomenMeeting, alt: "Women at OvercomeHER meeting" },
+              { src: IMAGES.jazmineSpeakingBlue, alt: "Jazmine speaking at event" },
+              { src: IMAGES.womenEmbrace, alt: "Women embracing" },
+              { src: IMAGES.womenCircle, alt: "Women in circle gathering" },
             ].map((photo, index) => (
               <div
                 key={index}

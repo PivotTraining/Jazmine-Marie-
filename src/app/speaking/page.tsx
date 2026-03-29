@@ -77,8 +77,8 @@ export default function SpeakingPage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl order-2 lg:order-1">
             <Image
-              src={IMAGES.jazmineSpeaker}
-              alt="Jazmine Marie speaking at an event"
+              src={IMAGES.jazmineSpeakingRed}
+              alt="Jazmine Marie speaking in red dress"
               width={600}
               height={750}
               className="w-full h-full object-cover"
@@ -171,12 +171,12 @@ export default function SpeakingPage() {
       <Section variant="warm" size="md">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {[
-            { src: IMAGES.conference1, alt: "OvercomeHER conference" },
-            { src: IMAGES.eventGalentines1, alt: "Women's gathering" },
-            { src: IMAGES.conference2, alt: "Panel discussion" },
-            { src: IMAGES.eventGalentines2, alt: "Workshop facilitation" },
-            { src: IMAGES.conference3, alt: "Community event" },
-            { src: IMAGES.eventGalentines3, alt: "Live event" },
+            { src: IMAGES.jazmineSpeakingRed, alt: "Jazmine speaking in red dress" },
+            { src: IMAGES.jazmineSpeakingBlue, alt: "Jazmine speaking at event" },
+            { src: IMAGES.eventRoom, alt: "Conference room full of women" },
+            { src: IMAGES.jazmineShameTalk, alt: "Jazmine presenting on overcoming shame" },
+            { src: IMAGES.eventWomenMeeting, alt: "Women at OvercomeHER meeting" },
+            { src: IMAGES.jazmineHosting, alt: "Jazmine hosting workshop" },
           ].map((img) => (
             <div
               key={img.alt}

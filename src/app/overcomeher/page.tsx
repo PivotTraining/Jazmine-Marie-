@@ -201,7 +201,7 @@ export default function OvercomeHERPage() {
           <AnimateOnScroll animation="fade-up" delay={0}>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src={IMAGES.eventGalentines1}
+                src={IMAGES.womenCircle}
                 alt="OvercomeHER community event"
                 fill
                 className="object-cover"
@@ -211,7 +211,7 @@ export default function OvercomeHERPage() {
           <AnimateOnScroll animation="fade-up" delay={100}>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src={IMAGES.eventGalentines2}
+                src={IMAGES.womenEmbrace}
                 alt="OvercomeHER community gathering"
                 fill
                 className="object-cover"
@@ -221,7 +221,7 @@ export default function OvercomeHERPage() {
           <AnimateOnScroll animation="fade-up" delay={200}>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src={IMAGES.eventGalentines3}
+                src={IMAGES.jazmineSpeakingBlue}
                 alt="OvercomeHER community connection"
                 fill
                 className="object-cover"
