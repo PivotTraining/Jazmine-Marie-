@@ -46,8 +46,14 @@ export function Header() {
             );
           })}
           <Link
+            href="/healing-style-quiz"
+            className="ml-2 px-5 py-2 rounded-full text-sm font-medium bg-blush-400 text-white hover:bg-blush-500 transition-colors font-[family-name:var(--font-body)]"
+          >
+            Take the Quiz
+          </Link>
+          <Link
             href="/login"
-            className="ml-2 px-5 py-2 rounded-full text-sm font-medium bg-warm-800 text-white hover:bg-warm-900 transition-colors font-[family-name:var(--font-body)]"
+            className="ml-1 px-5 py-2 rounded-full text-sm font-medium bg-warm-800 text-white hover:bg-warm-900 transition-colors font-[family-name:var(--font-body)]"
           >
             Sign In
           </Link>
@@ -86,6 +92,13 @@ export function Header() {
                 </Link>
               );
             })}
+            <Link
+              href="/healing-style-quiz"
+              onClick={() => setMobileOpen(false)}
+              className="block mt-2 px-4 py-3 rounded-lg text-base font-medium bg-blush-400 text-white text-center hover:bg-blush-500 transition-colors font-[family-name:var(--font-body)]"
+            >
+              Take the Quiz
+            </Link>
             <Link
               href="/login"
               onClick={() => setMobileOpen(false)}
