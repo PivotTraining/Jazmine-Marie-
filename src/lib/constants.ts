@@ -23,6 +23,8 @@ export const MEMBERSHIP_TIERS = [
       "For the woman who's just getting started on her growth journey. NurturHER gives you structure without pressure — a soft space to stay encouraged and consistent.",
     priceMonthly: 19.97,
     priceYearly: 199,
+    stripePaymentLink: "https://buy.stripe.com/fZu14nc4deM02b59nna3u0n",
+    stripePriceId: "price_1TGfZBERWdPcDJ1ZZZHaFMpa",
     features: [
       "Monthly healing theme + journaling prompts",
       "Access to community support spaces",
@@ -47,6 +49,8 @@ export const MEMBERSHIP_TIERS = [
       "You're beyond surface-level. You learn best in community and guided conversation. TransformHER gives you consistency, structure, and deeper self-discovery.",
     priceMonthly: 47.97,
     priceYearly: 479,
+    stripePaymentLink: "https://buy.stripe.com/9B628rd8h0Va7vp8jja3u0o",
+    stripePriceId: "price_1TGfZGERWdPcDJ1Z0stqmgbU",
     features: [
       "Everything in NurturHER, plus:",
       "Monthly Live Community Sessions",
@@ -73,6 +77,8 @@ export const MEMBERSHIP_TIERS = [
       "You're ready to move beyond survival and step fully into your power. AscendHER is for women who want hands-on guidance, spiritual alignment, and next-level breakthroughs.",
     priceMonthly: 97,
     priceYearly: 970,
+    stripePaymentLink: "https://buy.stripe.com/bJebJ1gktgU8cPJeHHa3u0p",
+    stripePriceId: "price_1TGfZHERWdPcDJ1ZsmdjbzSv",
     features: [
       "Everything in TransformHER, plus:",
       "Live Coaching with Jazmine + Chris Marvel",

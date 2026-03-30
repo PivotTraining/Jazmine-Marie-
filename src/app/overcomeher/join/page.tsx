@@ -62,7 +62,7 @@ export default function JoinPage() {
                 </span>
               </div>
               <div className="mt-6">
-                <Link href="/login" className="block">
+                <a href={tier.stripePaymentLink} className="block">
                   <Button
                     variant={tier.highlighted ? "warm" : "primary"}
                     size="md"
@@ -70,7 +70,7 @@ export default function JoinPage() {
                   >
                     {tier.cta} <ArrowRight className="h-4 w-4" />
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           ))}

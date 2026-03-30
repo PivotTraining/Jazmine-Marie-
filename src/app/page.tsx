@@ -447,6 +447,34 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* ========== HEALING STYLE QUIZ CTA ========== */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-plum-50 via-blush-50 to-warm-50">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20 lg:px-8">
+          <AnimateOnScroll animation="fade-up">
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-sm uppercase tracking-[0.25em] text-plum-400 font-[family-name:var(--font-body)] font-medium">
+                Free Quiz
+              </p>
+              <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-warm-900">
+                Not sure where to start?{" "}
+                <span className="italic text-blush-400">Discover your healing style.</span>
+              </h2>
+              <p className="mt-4 text-warm-500 font-[family-name:var(--font-body)]">
+                Take our free 2-minute quiz to find out how you heal, what you need,
+                and which tier is right for you.
+              </p>
+              <div className="mt-6">
+                <Link href="/healing-style-quiz">
+                  <Button variant="primary" size="lg">
+                    Take the Quiz <ArrowRight className="h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
       {/* ========== GUARANTEE ========== */}
       <Section variant="default" size="md">
         <AnimateOnScroll animation="scale">
