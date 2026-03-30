@@ -73,12 +73,16 @@ export default function ProfilePage() {
               </span>
             </div>
             <div className="mt-4 flex gap-3">
-              <Button variant="outline" size="sm">
-                <ArrowUpRight className="h-4 w-4" /> Upgrade to AscendHER
-              </Button>
-              <Button variant="ghost" size="sm">
-                Manage Billing
-              </Button>
+              <Link href="/overcomeher/membership">
+                <Button variant="outline" size="sm">
+                  <ArrowUpRight className="h-4 w-4" /> Upgrade to AscendHER
+                </Button>
+              </Link>
+              <Link href="/overcomeher/membership">
+                <Button variant="ghost" size="sm">
+                  Manage Billing
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -120,12 +124,12 @@ export default function ProfilePage() {
 
           {/* Actions */}
           <div className="flex justify-between items-center">
-            <button className="text-sm text-warm-400 hover:text-warm-600 font-[family-name:var(--font-body)] flex items-center gap-2">
+            <Link href="/login" className="text-sm text-warm-400 hover:text-warm-600 font-[family-name:var(--font-body)] flex items-center gap-2">
               <LogOut className="h-4 w-4" /> Sign Out
-            </button>
-            <button className="text-sm text-rose-400 hover:text-rose-500 font-[family-name:var(--font-body)]">
+            </Link>
+            <Link href="/contact" className="text-sm text-rose-400 hover:text-rose-500 font-[family-name:var(--font-body)]">
               Cancel Membership
-            </button>
+            </Link>
           </div>
         </div>
       </Section>

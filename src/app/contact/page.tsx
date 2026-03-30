@@ -9,6 +9,7 @@ import {
   Share,
   Send,
   CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
@@ -17,13 +18,33 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setLoading(false);
-    setSubmitted(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: new FormData(e.currentTarget).get("name"),
+          email: new FormData(e.currentTarget).get("email"),
+          subject: new FormData(e.currentTarget).get("subject"),
+          message: new FormData(e.currentTarget).get("message"),
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to send");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   const inputClass =
@@ -141,6 +162,12 @@ export default function ContactPage() {
                 onSubmit={handleSubmit}
                 className="space-y-6 p-8 rounded-2xl bg-warm-50 border border-warm-100"
               >
+                {error && (
+                  <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-sm font-[family-name:var(--font-body)]">
+                    <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                    {error}
+                  </div>
+                )}
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label

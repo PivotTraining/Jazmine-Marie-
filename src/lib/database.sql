@@ -147,6 +147,30 @@ create table public.speaking_inquiries (
 alter table public.speaking_inquiries enable row level security;
 create policy "Service role can manage inquiries" on public.speaking_inquiries for all using (auth.role() = 'service_role');
 
+-- Contact Messages
+create table public.contact_messages (
+  id uuid default uuid_generate_v4() primary key,
+  name text not null,
+  email text not null,
+  subject text not null default '',
+  message text not null,
+  created_at timestamptz default now() not null
+);
+
+alter table public.contact_messages enable row level security;
+create policy "Service role can manage contact messages" on public.contact_messages for all using (auth.role() = 'service_role');
+
+-- Newsletter Subscribers
+create table public.newsletter_subscribers (
+  id uuid default uuid_generate_v4() primary key,
+  email text unique not null,
+  subscribed_at timestamptz default now() not null,
+  unsubscribed_at timestamptz
+);
+
+alter table public.newsletter_subscribers enable row level security;
+create policy "Service role can manage newsletter" on public.newsletter_subscribers for all using (auth.role() = 'service_role');
+
 -- Auto-create profile on signup
 create or replace function public.handle_new_user()
 returns trigger as $$

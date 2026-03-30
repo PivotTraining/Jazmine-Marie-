@@ -1,20 +1,47 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function SpeakingInquiryForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    // In production, this would POST to an API route that saves to Supabase
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setLoading(false);
-    setSubmitted(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const res = await fetch("/api/speaking-inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          organization: formData.get("organization"),
+          eventType: formData.get("eventType"),
+          date: formData.get("date"),
+          audienceSize: formData.get("audienceSize"),
+          message: formData.get("message"),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to submit");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
@@ -38,53 +65,32 @@ export function SpeakingInquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 p-8 rounded-2xl bg-white shadow-sm">
+      {error && (
+        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-rose-600 font-[family-name:var(--font-body)]">{error}</p>
+        </div>
+      )}
+
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className={labelClass}>
-            Your Name *
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            placeholder="Full name"
-            className={inputClass}
-          />
+          <label htmlFor="name" className={labelClass}>Your Name *</label>
+          <input id="name" name="name" type="text" required placeholder="Full name" className={inputClass} />
         </div>
         <div>
-          <label htmlFor="email" className={labelClass}>
-            Email *
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="you@example.com"
-            className={inputClass}
-          />
+          <label htmlFor="email" className={labelClass}>Email *</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" className={inputClass} />
         </div>
       </div>
 
       <div>
-        <label htmlFor="organization" className={labelClass}>
-          Organization / Church / Company
-        </label>
-        <input
-          id="organization"
-          name="organization"
-          type="text"
-          placeholder="Organization name"
-          className={inputClass}
-        />
+        <label htmlFor="organization" className={labelClass}>Organization / Church / Company</label>
+        <input id="organization" name="organization" type="text" placeholder="Organization name" className={inputClass} />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="eventType" className={labelClass}>
-            Event Type *
-          </label>
+          <label htmlFor="eventType" className={labelClass}>Event Type *</label>
           <select id="eventType" name="eventType" required className={inputClass}>
             <option value="">Select event type</option>
             <option value="conference">Conference / Summit</option>
@@ -98,17 +104,13 @@ export function SpeakingInquiryForm() {
           </select>
         </div>
         <div>
-          <label htmlFor="date" className={labelClass}>
-            Preferred Date
-          </label>
+          <label htmlFor="date" className={labelClass}>Preferred Date</label>
           <input id="date" name="date" type="date" className={inputClass} />
         </div>
       </div>
 
       <div>
-        <label htmlFor="audienceSize" className={labelClass}>
-          Expected Audience Size
-        </label>
+        <label htmlFor="audienceSize" className={labelClass}>Expected Audience Size</label>
         <select id="audienceSize" name="audienceSize" className={inputClass}>
           <option value="">Select audience size</option>
           <option value="under-50">Under 50</option>
@@ -120,9 +122,7 @@ export function SpeakingInquiryForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className={labelClass}>
-          Tell us about your event *
-        </label>
+        <label htmlFor="message" className={labelClass}>Tell us about your event *</label>
         <textarea
           id="message"
           name="message"
@@ -133,20 +133,8 @@ export function SpeakingInquiryForm() {
         />
       </div>
 
-      <Button
-        type="submit"
-        variant="primary"
-        size="lg"
-        className="w-full"
-        disabled={loading}
-      >
-        {loading ? (
-          "Sending..."
-        ) : (
-          <>
-            Send Inquiry <Send className="h-5 w-5" />
-          </>
-        )}
+      <Button type="submit" variant="primary" size="lg" className="w-full" disabled={loading}>
+        {loading ? "Sending..." : <><Send className="h-5 w-5" /> Send Inquiry</>}
       </Button>
     </form>
   );

@@ -120,9 +120,11 @@ export default function EventsPage() {
                   </div>
                 </div>
                 <div className="flex-shrink-0">
-                  <Button variant="primary" size="md">
-                    RSVP
-                  </Button>
+                  <Link href="/community/rooms/events">
+                    <Button variant="primary" size="md">
+                      RSVP
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

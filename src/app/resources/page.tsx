@@ -109,9 +109,10 @@ export default function ResourcesPage() {
       <Section variant="default" size="lg">
         <div className="grid sm:grid-cols-2 gap-6">
           {freeResources.map((resource) => (
-            <div
+            <Link
               key={resource.title}
-              className="group p-6 rounded-2xl bg-warm-50 border border-warm-100 hover:bg-white hover:shadow-md hover:border-blush-200 transition-all duration-300 cursor-pointer"
+              href="/overcomeher"
+              className="group block p-6 rounded-2xl bg-warm-50 border border-warm-100 hover:bg-white hover:shadow-md hover:border-blush-200 transition-all duration-300 cursor-pointer"
             >
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm group-hover:shadow">
@@ -132,7 +133,7 @@ export default function ResourcesPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </Section>
@@ -149,9 +150,10 @@ export default function ResourcesPage() {
         </div>
         <div className="grid md:grid-cols-2 gap-6">
           {blogPosts.map((post) => (
-            <article
+            <Link
               key={post.title}
-              className="group p-6 rounded-2xl bg-white border border-warm-100 hover:shadow-md transition-all cursor-pointer"
+              href="/overcomeher"
+              className="group block p-6 rounded-2xl bg-white border border-warm-100 hover:shadow-md transition-all cursor-pointer"
             >
               <div className="flex items-center gap-3 text-xs text-warm-400 font-[family-name:var(--font-body)] mb-3">
                 <span>{post.date}</span>
@@ -167,7 +169,7 @@ export default function ResourcesPage() {
               <div className="mt-4 flex items-center gap-1 text-sm text-blush-400 font-medium font-[family-name:var(--font-body)]">
                 Read more <ArrowRight className="h-3.5 w-3.5" />
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </Section>

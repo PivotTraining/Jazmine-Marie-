@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
-import { getSupabase } from "@/lib/supabase";
+import { getServerSupabase } from "@/lib/supabase";
 import Stripe from "stripe";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET ?? "";
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       const tierId = session.metadata?.tier_id;
 
       if (userId && tierId) {
-        await getSupabase().from("memberships").upsert({
+        await getServerSupabase().from("memberships").upsert({
           user_id: userId,
           tier_id: tierId,
           stripe_subscription_id: session.subscription as string,
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       const endDate = typeof periodEnd === "number"
         ? new Date(periodEnd * 1000).toISOString()
         : null;
-      await getSupabase()
+      await getServerSupabase()
         .from("memberships")
         .update({
           status: subscription.status === "active" ? "active" : "past_due",
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     case "customer.subscription.deleted": {
       const subscription = event.data.object as Stripe.Subscription;
-      await getSupabase()
+      await getServerSupabase()
         .from("memberships")
         .update({ status: "canceled" })
         .eq("stripe_subscription_id", subscription.id);
