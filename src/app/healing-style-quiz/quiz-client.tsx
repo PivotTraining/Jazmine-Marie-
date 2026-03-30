@@ -3,64 +3,38 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowRight,
-  ArrowLeft,
-  Heart,
-  Sparkles,
-  Shield,
-  Users,
-  Flame,
-  RefreshCw,
-  Check,
-} from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, Heart, Mail, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
-import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 import {
   QUIZ_QUESTIONS,
   HEALING_STYLE_RESULTS,
   calculateResult,
   type HealingStyle,
 } from "@/lib/quiz-data";
-import { MEMBERSHIP_TIERS, IMAGES } from "@/lib/constants";
+import { IMAGES } from "@/lib/constants";
 
-const styleIcons: Record<HealingStyle, React.ElementType> = {
-  "the-nurturer": Heart,
-  "the-warrior": Shield,
-  "the-reflector": Sparkles,
-  "the-connector": Users,
-  "the-rebuilder": Flame,
-};
-
-const styleColors: Record<string, string> = {
-  blush: "from-blush-100 to-blush-200 text-blush-600",
-  plum: "from-plum-100 to-plum-200 text-plum-600",
-  sage: "from-sage-100 to-sage-200 text-sage-600",
-  gold: "from-gold-100 to-gold-200 text-gold-600",
-  warm: "from-warm-200 to-warm-300 text-warm-700",
-};
-
-const styleBgColors: Record<string, string> = {
-  blush: "bg-blush-50",
-  plum: "bg-plum-50",
-  sage: "bg-sage-50",
-  gold: "bg-gold-50",
-  warm: "bg-warm-100",
-};
+type Stage = "intro" | "quiz" | "email" | "result";
 
 export function HealingStyleQuiz() {
-  const [stage, setStage] = useState<"intro" | "quiz" | "result">("intro");
+  const [stage, setStage] = useState<Stage>("intro");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<HealingStyle[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [result, setResult] = useState<HealingStyle | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   function startQuiz() {
     setStage("quiz");
     setCurrentQuestion(0);
     setAnswers([]);
     setResult(null);
+    setFirstName("");
+    setEmail("");
+    setEmailError("");
   }
 
   function selectAnswer(style: HealingStyle, optionIndex: number) {
@@ -76,7 +50,7 @@ export function HealingStyleQuiz() {
       } else {
         const finalResult = calculateResult(newAnswers);
         setResult(finalResult);
-        setStage("result");
+        setStage("email");
       }
     }, 400);
   }
@@ -88,81 +62,153 @@ export function HealingStyleQuiz() {
     }
   }
 
-  // ===== INTRO =====
+  async function handleEmailSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!firstName.trim() || !email.trim()) return;
+    setEmailLoading(true);
+    setEmailError("");
+
+    // Build score breakdown
+    const scores: Record<string, number> = {};
+    for (const a of answers) {
+      scores[a] = (scores[a] || 0) + 1;
+    }
+
+    try {
+      const res = await fetch("/api/quiz-submission", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          email: email.trim(),
+          result,
+          answers,
+          scores,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to submit");
+      }
+      setStage("result");
+    } catch (err) {
+      setEmailError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setEmailLoading(false);
+    }
+  }
+
+  // ================================================================
+  // INTRO PAGE
+  // ================================================================
   if (stage === "intro") {
     return (
       <>
-        <section className="relative bg-gradient-to-br from-warm-800 via-warm-900 to-warm-800 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(232,147,106,0.2),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(185,152,194,0.15),transparent_50%)]" />
-          <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40 lg:px-8 text-center">
-            <Image
-              src={IMAGES.pinkBrushLogo}
-              alt="OvercomeHER"
-              width={64}
-              height={64}
-              className="mx-auto mb-6 rounded-full"
-            />
-            <p className="text-sm uppercase tracking-[0.3em] text-blush-300 font-[family-name:var(--font-body)] font-medium">
-              Free Quiz
-            </p>
-            <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-tight max-w-3xl mx-auto">
-              Discover your{" "}
-              <span className="italic text-blush-300">healing style</span>
-            </h1>
-            <p className="mt-6 max-w-2xl mx-auto text-lg text-warm-300 leading-relaxed font-[family-name:var(--font-body)]">
-              Every woman heals differently. This 2-minute quiz will help you
-              understand how you process, what you need, and which path forward
-              is right for you.
-            </p>
-            <div className="mt-8">
-              <Button variant="warm" size="lg" onClick={startQuiz}>
-                Take the Quiz <ArrowRight className="h-5 w-5" />
-              </Button>
+        <section className="bg-warm-50">
+          <div className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8">
+            <div className="text-center mb-12">
+              <Image
+                src={IMAGES.pinkBrushLogo}
+                alt="OvercomeHER"
+                width={56}
+                height={56}
+                className="mx-auto mb-6 rounded-full"
+              />
+              <h1 className="text-5xl md:text-6xl font-semibold text-warm-900 leading-tight">
+                What&apos;s Your{" "}
+                <span className="italic text-blush-400">Healing Style</span>?
+              </h1>
+              <p className="mt-4 text-xl text-warm-500 font-[family-name:var(--font-body)] leading-relaxed">
+                Discover how you naturally process, heal, and grow so you can
+                stop forcing healing that doesn&apos;t fit you.
+              </p>
             </div>
-            <p className="mt-4 text-sm text-warm-400 font-[family-name:var(--font-body)]">
-              7 questions &middot; Takes about 2 minutes &middot; No email
-              required
-            </p>
+
+            <div className="max-w-2xl mx-auto space-y-10">
+              {/* Explanation */}
+              <div className="space-y-4 text-warm-600 font-[family-name:var(--font-body)] leading-relaxed text-lg">
+                <p>Healing is not one-size-fits-all.</p>
+                <p>
+                  Some women heal by talking.{" "}
+                  Some need quiet and reflection.{" "}
+                  Some need movement, understanding, creativity, connection, or
+                  space to breathe.
+                </p>
+                <p>
+                  The truth is, you may have been trying to heal in ways that
+                  don&apos;t actually match how you&apos;re wired.
+                </p>
+                <p>
+                  This quiz will help you understand your natural healing style
+                  so you can better recognize what you need, why certain things
+                  have or haven&apos;t worked for you, and what kind of support
+                  helps you grow.
+                </p>
+              </div>
+
+              {/* Why this matters */}
+              <div>
+                <h2 className="text-2xl font-semibold text-warm-800 mb-4">
+                  Why this matters
+                </h2>
+                <div className="space-y-4 text-warm-600 font-[family-name:var(--font-body)] leading-relaxed text-lg">
+                  <p>
+                    When you understand how you naturally process life, pain,
+                    stress, and growth, you can stop judging yourself and start
+                    healing with more clarity, grace, and intention.
+                  </p>
+                  <p>This is not about boxing you in.</p>
+                  <p>
+                    It&apos;s about giving you language, direction, and a more
+                    honest starting point.
+                  </p>
+                </div>
+              </div>
+
+              {/* What to expect */}
+              <div className="p-6 rounded-2xl bg-white border border-warm-100">
+                <h3 className="text-lg font-semibold text-warm-800 mb-3 font-[family-name:var(--font-body)]">
+                  What to expect:
+                </h3>
+                <ul className="space-y-2 text-warm-500 font-[family-name:var(--font-body)]">
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-sage-400 flex-shrink-0" />
+                    25 multiple-choice questions
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-sage-400 flex-shrink-0" />
+                    About 4 to 6 minutes
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-sage-400 flex-shrink-0" />
+                    One primary healing style result
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-sage-400 flex-shrink-0" />
+                    Optional email delivery of your results and next steps
+                  </li>
+                </ul>
+              </div>
+
+              {/* CTA */}
+              <div className="text-center pt-4">
+                <Button variant="primary" size="lg" onClick={startQuiz}>
+                  Start the Quiz <ArrowRight className="h-5 w-5" />
+                </Button>
+                <p className="mt-3 text-sm text-warm-400 font-[family-name:var(--font-body)] italic">
+                  A gentle first step toward understanding yourself better.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
-
-        <Section variant="default" size="md">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-semibold text-warm-800">
-              There are 5 healing styles
-            </h2>
-            <p className="mt-4 text-warm-500 font-[family-name:var(--font-body)]">
-              Each one reflects how you naturally process pain, grow, and move
-              forward. None is better or worse — they&apos;re all powerful.
-            </p>
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-5 gap-4">
-              {Object.values(HEALING_STYLE_RESULTS).map((style) => {
-                const Icon = styleIcons[style.id];
-                return (
-                  <div
-                    key={style.id}
-                    className="p-4 rounded-2xl bg-warm-50 text-center"
-                  >
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${styleColors[style.color]} flex items-center justify-center mx-auto`}
-                    >
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <p className="mt-2 text-sm font-semibold text-warm-700 font-[family-name:var(--font-body)]">
-                      {style.name}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </Section>
       </>
     );
   }
 
-  // ===== QUIZ =====
+  // ================================================================
+  // QUIZ QUESTIONS
+  // ================================================================
   if (stage === "quiz") {
     const question = QUIZ_QUESTIONS[currentQuestion];
     const progress = ((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100;
@@ -181,7 +227,7 @@ export function HealingStyleQuiz() {
                 <ArrowLeft className="h-4 w-4" /> Back
               </button>
               <span className="text-sm text-warm-400 font-[family-name:var(--font-body)]">
-                {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
+                Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
               </span>
             </div>
             <div className="w-full h-2 bg-warm-100 rounded-full overflow-hidden">
@@ -222,7 +268,7 @@ export function HealingStyleQuiz() {
                       {selectedOption === index ? (
                         <Check className="h-4 w-4" />
                       ) : (
-                        String.fromCharCode(65 + index)
+                        option.label
                       )}
                     </span>
                     <span className="text-warm-700 leading-relaxed pt-1">
@@ -238,179 +284,272 @@ export function HealingStyleQuiz() {
     );
   }
 
-  // ===== RESULT =====
+  // ================================================================
+  // EMAIL CAPTURE
+  // ================================================================
+  if (stage === "email") {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center bg-warm-50 px-6 py-20">
+        <div className="w-full max-w-md text-center">
+          <div className="w-16 h-16 rounded-2xl bg-blush-100 flex items-center justify-center mx-auto mb-6">
+            <Heart className="h-8 w-8 text-blush-400" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-semibold text-warm-900">
+            Your Healing Style Is Ready
+          </h1>
+          <p className="mt-4 text-warm-500 font-[family-name:var(--font-body)] leading-relaxed">
+            Enter your email to see your results and get a copy sent to your
+            inbox with thoughtful next steps.
+          </p>
+
+          <form
+            onSubmit={handleEmailSubmit}
+            className="mt-8 space-y-4 text-left"
+          >
+            {emailError && (
+              <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-sm text-rose-600 font-[family-name:var(--font-body)]">
+                {emailError}
+              </div>
+            )}
+            <div>
+              <label
+                htmlFor="firstName"
+                className="block text-sm font-medium text-warm-700 mb-1.5 font-[family-name:var(--font-body)]"
+              >
+                First Name
+              </label>
+              <div className="relative">
+                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-warm-300" />
+                <input
+                  id="firstName"
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Your first name"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white border border-warm-200 text-warm-800 placeholder:text-warm-300 focus:border-plum-300 focus:ring-2 focus:ring-plum-100 focus:outline-none transition-all font-[family-name:var(--font-body)]"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="quizEmail"
+                className="block text-sm font-medium text-warm-700 mb-1.5 font-[family-name:var(--font-body)]"
+              >
+                Email Address
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-warm-300" />
+                <input
+                  id="quizEmail"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white border border-warm-200 text-warm-800 placeholder:text-warm-300 focus:border-plum-300 focus:ring-2 focus:ring-plum-100 focus:outline-none transition-all font-[family-name:var(--font-body)]"
+                />
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={emailLoading}
+            >
+              {emailLoading ? "Submitting..." : "See My Results"}
+              {!emailLoading && <ArrowRight className="h-5 w-5" />}
+            </Button>
+
+            <p className="text-sm text-warm-400 font-[family-name:var(--font-body)] text-center">
+              We&apos;ll also send a gentle follow-up to help you take the next
+              right step.
+            </p>
+            <p className="text-xs text-warm-300 font-[family-name:var(--font-body)] text-center">
+              By continuing, you agree to receive your quiz result and occasional
+              OvercomeHER emails. You can unsubscribe anytime.
+            </p>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  // ================================================================
+  // RESULT PAGE
+  // ================================================================
   if (stage === "result" && result) {
     const style = HEALING_STYLE_RESULTS[result];
-    const Icon = styleIcons[result];
-    const recommendedTier = MEMBERSHIP_TIERS.find(
-      (t) => t.id === style.recommendedTier
-    );
 
     return (
       <>
-        {/* Result Hero */}
-        <section
-          className={`relative overflow-hidden ${styleBgColors[style.color]}`}
-        >
-          <div className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-8 text-center">
-            <div
-              className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${styleColors[style.color]} flex items-center justify-center mx-auto mb-6`}
-            >
-              <Icon className="h-10 w-10" />
-            </div>
-            <p className="text-sm uppercase tracking-[0.25em] text-warm-400 font-[family-name:var(--font-body)] font-medium">
+        {/* Result Header */}
+        <section className="bg-warm-50">
+          <div className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 text-center">
+            <p className="text-sm uppercase tracking-[0.25em] text-plum-400 font-[family-name:var(--font-body)] font-medium">
               Your Healing Style Is
             </p>
-            <h1 className="mt-2 text-5xl md:text-6xl font-semibold text-warm-900">
-              {style.name}
+            <h1 className="mt-4 text-5xl md:text-6xl font-semibold text-warm-900">
+              {style.title}
             </h1>
-            <p className="mt-4 text-xl text-warm-600 italic font-[family-name:var(--font-body)]">
-              {style.tagline}
+            <p className="mt-6 text-xl text-warm-600 italic font-[family-name:var(--font-body)] leading-relaxed max-w-xl mx-auto">
+              {style.identityHook}
             </p>
           </div>
         </section>
 
-        {/* Description */}
+        {/* What This Means */}
         <Section variant="default" size="lg">
-          <div className="max-w-3xl mx-auto">
-            <AnimateOnScroll animation="fade-up">
-              <p className="text-lg text-warm-600 leading-relaxed font-[family-name:var(--font-body)]">
-                {style.description}
-              </p>
-            </AnimateOnScroll>
-          </div>
-        </Section>
-
-        {/* Strengths & Growth */}
-        <Section variant="warm" size="lg">
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <AnimateOnScroll animation="fade-up">
-              <div className="p-8 rounded-2xl bg-white">
-                <h3 className="text-xl font-semibold text-warm-800 flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-blush-400" /> Your Strengths
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {style.strengths.map((s) => (
-                    <li
-                      key={s}
-                      className="flex items-start gap-2 text-warm-600 font-[family-name:var(--font-body)]"
-                    >
-                      <Check className="h-4 w-4 text-sage-400 flex-shrink-0 mt-1" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-up" delay={150}>
-              <div className="p-8 rounded-2xl bg-white">
-                <h3 className="text-xl font-semibold text-warm-800 flex items-center gap-2">
-                  <Heart className="h-5 w-5 text-plum-400" /> Growth Areas
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {style.growthAreas.map((g) => (
-                    <li
-                      key={g}
-                      className="flex items-start gap-2 text-warm-600 font-[family-name:var(--font-body)]"
-                    >
-                      <ArrowRight className="h-4 w-4 text-blush-400 flex-shrink-0 mt-1" />
-                      {g}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AnimateOnScroll>
-          </div>
-        </Section>
-
-        {/* Practices */}
-        <Section variant="default" size="lg">
-          <AnimateOnScroll animation="fade-up">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-3xl font-semibold text-warm-900">
-                Healing practices{" "}
-                <span className="italic text-blush-400">for you</span>
-              </h2>
-              <div className="mt-8 space-y-4">
-                {style.practicesForYou.map((practice, i) => (
-                  <div
-                    key={practice}
-                    className="p-5 rounded-xl bg-warm-50 border border-warm-100 text-left flex items-start gap-4"
-                  >
-                    <span className="w-8 h-8 rounded-full bg-blush-100 text-blush-500 flex items-center justify-center flex-shrink-0 text-sm font-bold font-[family-name:var(--font-body)]">
-                      {i + 1}
-                    </span>
-                    <span className="text-warm-600 font-[family-name:var(--font-body)]">
-                      {practice}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              What this means
+            </h2>
+            <div className="space-y-4 text-lg text-warm-600 font-[family-name:var(--font-body)] leading-relaxed">
+              {style.whatThisMeans.map((p, i) => (
+                <p key={i} style={{ whiteSpace: "pre-line" }}>{p}</p>
+              ))}
             </div>
-          </AnimateOnScroll>
-        </Section>
-
-        {/* Recommended Tier */}
-        {recommendedTier && (
-          <Section variant="warm" size="lg">
-            <AnimateOnScroll animation="scale">
-              <div className="max-w-2xl mx-auto text-center p-8 md:p-12 rounded-3xl bg-warm-800 text-white">
-                <p className="text-sm uppercase tracking-[0.25em] text-blush-300 font-[family-name:var(--font-body)] font-medium">
-                  Recommended For You
-                </p>
-                <h2 className="mt-4 text-3xl md:text-4xl font-semibold">
-                  {recommendedTier.name}
-                </h2>
-                <p className="mt-2 text-warm-300 italic font-[family-name:var(--font-body)]">
-                  {recommendedTier.tagline}
-                </p>
-                <p className="mt-4 text-warm-300 font-[family-name:var(--font-body)] leading-relaxed">
-                  Based on your healing style, {recommendedTier.name} is the
-                  best fit to support your growth journey. It includes the
-                  practices, community, and structure that {style.name}s thrive
-                  in.
-                </p>
-                <div className="mt-6 flex items-center justify-center gap-2 text-2xl font-bold">
-                  ${recommendedTier.priceMonthly}
-                  <span className="text-sm font-normal text-warm-400">
-                    /month
-                  </span>
-                </div>
-                <p className="text-sm text-blush-300 font-[family-name:var(--font-body)]">
-                  {recommendedTier.trialText}
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                  <Link href="/overcomeher/membership">
-                    <Button variant="warm" size="lg">
-                      View All Tiers <ArrowRight className="h-5 w-5" />
-                    </Button>
-                  </Link>
-                  <Link href="/overcomeher/join">
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="border-warm-500 text-warm-200 hover:bg-warm-700"
-                    >
-                      Join {recommendedTier.name}
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </AnimateOnScroll>
-          </Section>
-        )}
-
-        {/* Retake / Share */}
-        <Section variant="default" size="sm">
-          <div className="text-center">
-            <button
-              onClick={startQuiz}
-              className="inline-flex items-center gap-2 text-warm-400 hover:text-warm-600 transition-colors font-[family-name:var(--font-body)]"
-            >
-              <RefreshCw className="h-4 w-4" /> Retake the quiz
-            </button>
           </div>
         </Section>
+
+        {/* Core Needs */}
+        <Section variant="warm" size="lg">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              Your Core Needs
+            </h2>
+            <ul className="space-y-3">
+              {style.coreNeeds.map((need) => (
+                <li
+                  key={need}
+                  className="flex items-start gap-3 text-warm-600 font-[family-name:var(--font-body)] text-lg"
+                >
+                  <Heart className="h-5 w-5 text-blush-400 flex-shrink-0 mt-1" />
+                  {need}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+
+        {/* What This Looks Like */}
+        <Section variant="default" size="lg">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              What this looks like
+            </h2>
+            <ul className="space-y-3">
+              {style.whatThisLooksLike.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-warm-600 font-[family-name:var(--font-body)] text-lg"
+                >
+                  <Check className="h-5 w-5 text-sage-400 flex-shrink-0 mt-1" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+
+        {/* How This Shows Up */}
+        <Section variant="warm" size="lg">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              How this shows up
+            </h2>
+            <ul className="space-y-3">
+              {style.howThisShowsUp.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-warm-600 font-[family-name:var(--font-body)] text-lg"
+                >
+                  <ArrowRight className="h-5 w-5 text-plum-400 flex-shrink-0 mt-1" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+
+        {/* Strengths */}
+        <Section variant="default" size="lg">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              Your Strengths
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {style.strengths.map((s) => (
+                <div
+                  key={s}
+                  className="p-5 rounded-xl bg-warm-50 border border-warm-100 text-warm-700 font-[family-name:var(--font-body)] text-lg font-medium"
+                >
+                  {s}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* Growth Edge */}
+        <Section variant="warm" size="lg">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              Growth Edge
+            </h2>
+            <div className="space-y-2 text-lg text-warm-600 font-[family-name:var(--font-body)] leading-relaxed">
+              {style.growthEdge.map((line, i) => (
+                <p key={i} className={i > 0 ? "font-medium text-warm-800" : ""}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* What Actually Helps */}
+        <Section variant="default" size="lg">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-warm-900 mb-6">
+              What Actually Helps You Heal
+            </h2>
+            <ul className="space-y-3">
+              {style.whatActuallyHelps.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-warm-600 font-[family-name:var(--font-body)] text-lg"
+                >
+                  <Heart className="h-5 w-5 text-blush-400 flex-shrink-0 mt-1" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+
+        {/* CTA */}
+        <section className="bg-gradient-to-r from-warm-800 via-warm-900 to-warm-800">
+          <div className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white leading-snug">
+              {style.ctaHeading}
+            </h2>
+            <div className="mt-6 text-lg text-warm-300 font-[family-name:var(--font-body)] leading-relaxed whitespace-pre-line max-w-xl mx-auto">
+              {style.ctaBody}
+            </div>
+            <div className="mt-8">
+              <Link href="/overcomeher/join">
+                <Button variant="warm" size="lg">
+                  {style.ctaButton} <ArrowRight className="h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+            <p className="mt-4 text-warm-400 font-[family-name:var(--font-body)] italic">
+              {style.ctaSupportingLine}
+            </p>
+          </div>
+        </section>
       </>
     );
   }

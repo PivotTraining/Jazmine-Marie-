@@ -147,6 +147,21 @@ create table public.speaking_inquiries (
 alter table public.speaking_inquiries enable row level security;
 create policy "Service role can manage inquiries" on public.speaking_inquiries for all using (auth.role() = 'service_role');
 
+-- Quiz Submissions
+create table public.quiz_submissions (
+  id uuid default uuid_generate_v4() primary key,
+  first_name text not null,
+  email text not null,
+  result text not null,
+  answers jsonb not null default '[]',
+  scores jsonb not null default '{}',
+  source text not null default '',
+  created_at timestamptz default now() not null
+);
+
+alter table public.quiz_submissions enable row level security;
+create policy "Service role can manage quiz submissions" on public.quiz_submissions for all using (auth.role() = 'service_role');
+
 -- Contact Messages
 create table public.contact_messages (
   id uuid default uuid_generate_v4() primary key,
