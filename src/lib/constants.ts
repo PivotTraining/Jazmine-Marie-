@@ -205,6 +205,7 @@ export const IMAGES = {
   pinkBrushLogo: "/images/overcomeher-logo-pink.svg",
   // Jazmine portraits & headshots
   jazmineHero: "/images/jazmine-hero-new.jpg",
+  jazmineAboutHero: "/images/jazmine-about-hero.jpg",
   jazmineJournaling: "/images/jazmine-journaling.png",
   jazmineLaptopRed: "/images/jazmine-laptop-red.jpg",
   jazmineGodTee: "/images/jazmine-god-tee.jpg",

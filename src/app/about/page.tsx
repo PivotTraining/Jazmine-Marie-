@@ -38,8 +38,8 @@ export default function AboutPage() {
             <AnimateOnScroll animation="fade-up" delay={200}>
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-xl">
                 <Image
-                  src={IMAGES.jazmineLaptopRed}
-                  alt="Jazmine Marie"
+                  src={IMAGES.jazmineAboutHero}
+                  alt="Jazmine Marie by the lake"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -111,7 +111,7 @@ export default function AboutPage() {
                   She is the founder of OvercomeHER, a healing-centered women&apos;s community, and co-founder of PIVOT, a mental wellness training company that serves schools, organizations, and communities.
                 </p>
                 <p>
-                  As a mother of three, Jazmine understands the weight women carry&mdash;and the importance of doing the inner work, not just for themselves, but for the lives they impact.
+                  As a wife and mother of three, Jazmine understands the weight women carry&mdash;and the importance of doing the inner work, not just for themselves, but for the lives they impact.
                 </p>
                 <p>
                   Her work focuses on identity, emotional intelligence, boundaries, and self-awareness, helping women recognize their patterns, shift their thinking, and grow into stronger, more grounded versions of themselves.
