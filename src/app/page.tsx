@@ -192,8 +192,8 @@ export default function HomePage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.eventRoom}
-                  alt="OvercomeHER community event"
+                  src={IMAGES.communityTestimonial1}
+                  alt="Testimonial: Yessss! I'm blown away by the power in this space"
                   width={400}
                   height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
@@ -201,8 +201,8 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.jazmineSpeakingBlue}
-                  alt="Women's gathering event"
+                  src={IMAGES.communityTestimonial2}
+                  alt="Testimonial: OvercomeHER was a success PER USUAL"
                   width={400}
                   height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
@@ -210,8 +210,8 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.womenEmbrace}
-                  alt="Community sisterhood"
+                  src={IMAGES.communityCelebration}
+                  alt="Women celebrating at OvercomeHER event"
                   width={400}
                   height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
@@ -219,8 +219,8 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.womenCircle}
-                  alt="OvercomeHER conference"
+                  src={IMAGES.jazmineHero}
+                  alt="Jazmine Marie"
                   width={400}
                   height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"

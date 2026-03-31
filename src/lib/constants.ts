@@ -219,6 +219,9 @@ export const IMAGES = {
   jazmineHosting: "/images/jazmine-hosting.jpg",
   jazmineWithGuest: "/images/jazmine-with-guest.jpg",
   // Community & events
+  communityTestimonial1: "/images/community-1.jpg",
+  communityTestimonial2: "/images/community-2.jpg",
+  communityCelebration: "/images/community-3.jpg",
   womenCircle: "/images/women-circle.jpg",
   womenEmbrace: "/images/women-embrace.jpg",
   eventRoom: "/images/event-room.jpg",
