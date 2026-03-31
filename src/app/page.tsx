@@ -192,40 +192,22 @@ export default function HomePage() {
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll animation="slide-left">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
-                <Image
-                  src={IMAGES.communityTestimonial1}
-                  alt="Testimonial: Yessss! I'm blown away by the power in this space"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
-                <Image
-                  src={IMAGES.communityTestimonial2}
-                  alt="Testimonial: OvercomeHER was a success PER USUAL"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
+            <div className="flex flex-col gap-4">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
                 <Image
                   src={IMAGES.communityCelebration}
                   alt="Women celebrating at OvercomeHER event"
-                  width={400}
-                  height={400}
+                  width={600}
+                  height={450}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
                 <Image
                   src={IMAGES.communitySisterhood}
                   alt="Women laughing together — sisterhood"
-                  width={400}
-                  height={400}
+                  width={600}
+                  height={450}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
