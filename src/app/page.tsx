@@ -24,6 +24,9 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
+              <p className="text-3xl md:text-4xl italic text-pink-500 font-[family-name:var(--font-sans)] mb-2">
+                Hey sis, you belong here.
+              </p>
               <p className="text-sm uppercase tracking-[0.25em] text-blush-500 font-[family-name:var(--font-body)] font-medium">
                 Host &middot; Speaker &middot; Healing Advocate
               </p>
