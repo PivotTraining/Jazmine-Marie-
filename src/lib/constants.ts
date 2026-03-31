@@ -9,7 +9,6 @@ export const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Speaking", href: "/speaking" },
   { label: "OvercomeHER", href: "/overcomeher" },
-  { label: "Community", href: "/community" },
   { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -201,9 +200,9 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const IMAGES = {
-  overcomeherLogo: "/images/overcomeher-logo.png",
-  overcomeherLogoAlt: "/images/overcomeher-logo-alt.png",
-  pinkBrushLogo: "/images/pink-brush-logo.png",
+  overcomeherLogo: "/images/overcomeher-logo-pink.svg",
+  overcomeherLogoAlt: "/images/overcomeher-logo-pink.svg",
+  pinkBrushLogo: "/images/overcomeher-logo-pink.svg",
   // Jazmine portraits & headshots
   jazmineJournaling: "/images/jazmine-journaling.png",
   jazmineLaptopRed: "/images/jazmine-laptop-red.jpg",

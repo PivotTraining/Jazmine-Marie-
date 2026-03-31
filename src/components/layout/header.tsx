@@ -35,7 +35,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-full text-sm font-medium font-[family-name:var(--font-body)] transition-colors ${
+                className={`px-3 py-2 rounded-full text-sm font-medium font-[family-name:var(--font-body)] transition-colors whitespace-nowrap ${
                   active
                     ? "bg-warm-100 text-warm-800"
                     : "text-warm-600 hover:text-warm-800 hover:bg-warm-50"
@@ -45,18 +45,20 @@ export function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/healing-style-quiz"
-            className="ml-2 px-5 py-2 rounded-full text-sm font-medium bg-blush-400 text-white hover:bg-blush-500 transition-colors font-[family-name:var(--font-body)]"
-          >
-            Take the Quiz
-          </Link>
-          <Link
-            href="/login"
-            className="ml-1 px-5 py-2 rounded-full text-sm font-medium bg-warm-800 text-white hover:bg-warm-900 transition-colors font-[family-name:var(--font-body)]"
-          >
-            Sign In
-          </Link>
+          <div className="ml-2 flex items-center gap-2 flex-shrink-0">
+            <Link
+              href="/healing-style-quiz"
+              className="px-4 py-2 rounded-full text-sm font-medium bg-blush-400 text-white hover:bg-blush-500 transition-colors font-[family-name:var(--font-body)] whitespace-nowrap"
+            >
+              Take the Quiz
+            </Link>
+            <Link
+              href="/login"
+              className="px-4 py-2 rounded-full text-sm font-medium bg-warm-800 text-white hover:bg-warm-900 transition-colors font-[family-name:var(--font-body)] whitespace-nowrap"
+            >
+              Sign In
+            </Link>
+          </div>
         </div>
 
         {/* Mobile menu button */}
