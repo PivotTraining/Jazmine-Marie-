@@ -5,7 +5,7 @@ import { NewsletterForm } from "./newsletter-form";
 
 export function Footer() {
   return (
-    <footer className="bg-warm-800 text-warm-200">
+    <footer className="bg-berry-800 text-berry-200">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -15,7 +15,7 @@ export function Footer() {
                 {SITE_NAME}
               </span>
             </Link>
-            <p className="mt-4 max-w-md text-warm-300 font-[family-name:var(--font-body)] leading-relaxed">
+            <p className="mt-4 max-w-md text-berry-300 font-[family-name:var(--font-body)] leading-relaxed">
               Creating transformative spaces where women find healing, wholeness,
               and the courage to become who they were always meant to be.
             </p>
@@ -24,7 +24,7 @@ export function Footer() {
                 href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-warm-700 text-warm-300 hover:bg-warm-600 hover:text-white transition-colors"
+                className="p-2 rounded-full bg-berry-700 text-berry-300 hover:bg-pink-500 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <Globe className="h-5 w-5" />
@@ -33,7 +33,7 @@ export function Footer() {
                 href={SOCIAL_LINKS.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-warm-700 text-warm-300 hover:bg-warm-600 hover:text-white transition-colors"
+                className="p-2 rounded-full bg-berry-700 text-berry-300 hover:bg-pink-500 hover:text-white transition-colors"
                 aria-label="Facebook"
               >
                 <Share className="h-5 w-5" />
@@ -42,7 +42,7 @@ export function Footer() {
                 href={SOCIAL_LINKS.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-warm-700 text-warm-300 hover:bg-warm-600 hover:text-white transition-colors"
+                className="p-2 rounded-full bg-berry-700 text-berry-300 hover:bg-pink-500 hover:text-white transition-colors"
                 aria-label="YouTube"
               >
                 <Video className="h-5 w-5" />
@@ -52,7 +52,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-warm-400 font-[family-name:var(--font-body)]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-berry-400 font-[family-name:var(--font-body)]">
               Navigate
             </h3>
             <ul className="mt-4 space-y-2">
@@ -60,7 +60,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-warm-300 hover:text-white transition-colors font-[family-name:var(--font-body)]"
+                    className="text-berry-300 hover:text-white transition-colors font-[family-name:var(--font-body)]"
                   >
                     {link.label}
                   </Link>
@@ -71,17 +71,17 @@ export function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-warm-400 font-[family-name:var(--font-body)]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-berry-400 font-[family-name:var(--font-body)]">
               Stay Connected
             </h3>
-            <p className="mt-4 text-sm text-warm-300 font-[family-name:var(--font-body)]">
+            <p className="mt-4 text-sm text-berry-300 font-[family-name:var(--font-body)]">
               Get encouragement, updates, and invitations delivered to your inbox.
             </p>
             <NewsletterForm />
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-warm-700 text-center text-sm text-warm-400 font-[family-name:var(--font-body)]">
+        <div className="mt-12 pt-8 border-t border-berry-700 text-center text-sm text-berry-400 font-[family-name:var(--font-body)]">
           &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
         </div>
       </div>

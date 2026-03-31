@@ -1,56 +1,117 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #FDFBF9;
-  --color-foreground: #1A1A1A;
-  --color-warm-50: #FDFBF9;
-  --color-warm-100: #F7F3EF;
-  --color-warm-200: #EDE6DD;
-  --color-warm-300: #D4C8BA;
-  --color-warm-400: #B8A899;
-  --color-warm-500: #9C8B7A;
-  --color-warm-600: #7A6B5D;
-  --color-warm-700: #5C4F43;
-  --color-warm-800: #3D352C;
-  --color-warm-900: #1F1A15;
+  /* ========== NEW COLOR SYSTEM — Hot Pink + Berry + Champagne ========== */
+
+  /* Background & neutrals — warm champagne/cream base */
+  --color-background: #FDF8F5;
+  --color-foreground: #2D1F2D;
+
+  /* Cream/Champagne neutrals (warm base tones) */
+  --color-cream-50: #FFFBF8;
+  --color-cream-100: #FDF5EF;
+  --color-cream-200: #F7EADF;
+  --color-cream-300: #EDDCCF;
+  --color-cream-400: #D8C4B4;
+  --color-cream-500: #BFA898;
+  --color-cream-600: #9A8474;
+  --color-cream-700: #756158;
+  --color-cream-800: #504240;
+  --color-cream-900: #2D1F2D;
+
+  /* Hot Pink — PRIMARY (matches #E91E8C logo) */
+  --color-pink-50: #FFF0F7;
+  --color-pink-100: #FFE0EF;
+  --color-pink-200: #FFC2DF;
+  --color-pink-300: #FF8DC3;
+  --color-pink-400: #F553A5;
+  --color-pink-500: #E91E8C;
+  --color-pink-600: #CC0E74;
+  --color-pink-700: #A80B5E;
+  --color-pink-800: #7E0A48;
+  --color-pink-900: #530833;
+
+  /* Berry/Plum — DARK ACCENT (for headers, dark sections) */
+  --color-berry-50: #FAF0F6;
+  --color-berry-100: #F3DDE9;
+  --color-berry-200: #E5B8D3;
+  --color-berry-300: #C98AB5;
+  --color-berry-400: #A85E93;
+  --color-berry-500: #8A3D75;
+  --color-berry-600: #6E2D5D;
+  --color-berry-700: #54224A;
+  --color-berry-800: #3D1938;
+  --color-berry-900: #2A1128;
+
+  /* Soft Rose — SECONDARY (soft feminine accent) */
   --color-rose-50: #FFF5F5;
-  --color-rose-100: #FEEAEA;
-  --color-rose-200: #FDD5D5;
-  --color-rose-300: #F9A8A8;
-  --color-rose-400: #F47A7A;
-  --color-rose-500: #E85D5D;
-  --color-rose-600: #C93D3D;
-  --color-blush-50: #FEF6F0;
-  --color-blush-100: #FDE8D8;
-  --color-blush-200: #FAD0B0;
-  --color-blush-300: #F5B088;
-  --color-blush-400: #E8936A;
-  --color-blush-500: #D4774E;
+  --color-rose-100: #FFE8E8;
+  --color-rose-200: #FFD0D0;
+  --color-rose-300: #FFB0B0;
+  --color-rose-400: #F08080;
+  --color-rose-500: #DC6B6B;
+  --color-rose-600: #B84D4D;
+
+  /* Lavender — TERTIARY (spiritual/calm accent) */
+  --color-lav-50: #F8F4FC;
+  --color-lav-100: #EEDFFA;
+  --color-lav-200: #DFC4F5;
+  --color-lav-300: #C79CEB;
+  --color-lav-400: #A97DD6;
+  --color-lav-500: #8B5FBA;
+  --color-lav-600: #6D4499;
+
+  /* Sage — ACCENT (grounding/nature) */
   --color-sage-50: #F4F6F3;
   --color-sage-100: #E5EAE2;
   --color-sage-200: #C9D4C4;
   --color-sage-300: #A3B49C;
   --color-sage-400: #7D9474;
   --color-sage-500: #5E7656;
-  --color-plum-50: #F8F4F9;
-  --color-plum-100: #EDE4F0;
-  --color-plum-200: #D9C6DE;
-  --color-plum-300: #B998C2;
-  --color-plum-400: #9A6FA8;
-  --color-plum-500: #7B4F8A;
+
+  /* Gold — HIGHLIGHT */
   --color-gold-50: #FFFCF0;
   --color-gold-100: #FFF5CC;
   --color-gold-200: #FFE999;
   --color-gold-300: #FFD966;
   --color-gold-400: #E8B930;
   --color-gold-500: #C49A1A;
+
+  /* Warm legacy aliases (so existing warm-* classes still work) */
+  --color-warm-50: var(--color-cream-50);
+  --color-warm-100: var(--color-cream-100);
+  --color-warm-200: var(--color-cream-200);
+  --color-warm-300: var(--color-cream-300);
+  --color-warm-400: var(--color-cream-400);
+  --color-warm-500: var(--color-cream-500);
+  --color-warm-600: var(--color-cream-600);
+  --color-warm-700: var(--color-cream-700);
+  --color-warm-800: var(--color-cream-800);
+  --color-warm-900: var(--color-cream-900);
+
+  /* Blush aliases → now point to pink */
+  --color-blush-50: var(--color-pink-50);
+  --color-blush-100: var(--color-pink-100);
+  --color-blush-200: var(--color-pink-200);
+  --color-blush-300: var(--color-pink-300);
+  --color-blush-400: var(--color-pink-500);
+  --color-blush-500: var(--color-pink-600);
+
+  /* Plum aliases → now point to berry */
+  --color-plum-50: var(--color-berry-50);
+  --color-plum-100: var(--color-berry-100);
+  --color-plum-200: var(--color-berry-200);
+  --color-plum-300: var(--color-berry-300);
+  --color-plum-400: var(--color-berry-500);
+  --color-plum-500: var(--color-berry-600);
+
   --font-sans: var(--font-cormorant);
   --font-body: var(--font-dm-sans);
 }
 
 :root {
-  --background: #FDFBF9;
-  --foreground: #1A1A1A;
+  --background: #FDF8F5;
+  --foreground: #2D1F2D;
 }
 
 body {
@@ -65,43 +126,38 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans), Georgia, serif;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-warm-100);
+  background: var(--color-cream-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-warm-300);
+  background: var(--color-cream-400);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-warm-400);
+  background: var(--color-pink-300);
 }
 
-/* Selection color */
 ::selection {
-  background-color: var(--color-blush-200);
-  color: var(--color-warm-900);
+  background-color: var(--color-pink-200);
+  color: var(--color-berry-900);
 }
 
-/* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--color-plum-400);
+  outline: 2px solid var(--color-pink-500);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Animation utilities */
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
