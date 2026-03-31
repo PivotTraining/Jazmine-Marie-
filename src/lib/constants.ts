@@ -212,6 +212,7 @@ export const IMAGES = {
   jazmineBookClub: "/images/jazmine-book-club.jpg",
   // Jazmine speaking & hosting
   jazmineSpeakingHero: "/images/jazmine-speaking-hero.jpg",
+  jazmineSpeakerCta: "/images/jazmine-speaker-cta.jpg",
   jazmineSpeakingRed: "/images/jazmine-speaking-red.jpg",
   jazmineSpeakingBlue: "/images/jazmine-speaking-blue.jpg",
   jazmineSpeakingMic: "/images/jazmine-speaking-mic.jpg",

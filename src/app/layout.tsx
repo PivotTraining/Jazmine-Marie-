@@ -6,7 +6,7 @@ import "./globals.css";
 
 let fontClasses = "";
 try {
-  const { Cormorant_Garamond, DM_Sans, Dancing_Script } = require("next/font/google");
+  const { Cormorant_Garamond, DM_Sans, Great_Vibes } = require("next/font/google");
   const cormorant = Cormorant_Garamond({
     variable: "--font-cormorant",
     subsets: ["latin"],
@@ -19,13 +19,13 @@ try {
     weight: ["300", "400", "500", "600", "700"],
     display: "swap",
   });
-  const dancingScript = Dancing_Script({
+  const greatVibes = Great_Vibes({
     variable: "--font-script",
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
+    weight: ["400"],
     display: "swap",
   });
-  fontClasses = `${cormorant.variable} ${dmSans.variable} ${dancingScript.variable}`;
+  fontClasses = `${cormorant.variable} ${dmSans.variable} ${greatVibes.variable}`;
 } catch {
   // Fonts unavailable — use system fallbacks
 }

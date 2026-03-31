@@ -23,7 +23,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-blush-50/60 via-transparent to-plum-50/30" />
         <div className="relative mx-auto max-w-7xl px-6 pt-10 pb-24 md:pt-14 md:pb-32 lg:pt-16 lg:pb-40 lg:px-8">
           {/* Handwritten greeting */}
-          <p className="text-5xl md:text-6xl lg:text-7xl text-pink-500 font-[family-name:var(--font-script)] mb-10 md:mb-14">
+          <p className="text-5xl md:text-6xl lg:text-7xl text-pink-500 font-[family-name:var(--font-script)] mb-10 md:mb-14 animate-script-reveal">
             Hey sis, you belong here.
           </p>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -307,21 +307,12 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="hidden lg:grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden aspect-[3/4]">
+            <div className="hidden lg:block">
+              <div className="rounded-2xl overflow-hidden aspect-[3/2]">
                 <Image
-                  src={IMAGES.jazmineShameTalk}
-                  alt="Jazmine presenting on overcoming shame"
-                  width={400}
-                  height={530}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="rounded-2xl overflow-hidden aspect-[3/4] mt-8">
-                <Image
-                  src={IMAGES.jazmineHosting}
-                  alt="Jazmine hosting workshop"
-                  width={400}
+                  src={IMAGES.jazmineSpeakerCta}
+                  alt="Jazmine Marie speaking in hot pink on stage with microphone"
+                  width={800}
                   height={530}
                   className="w-full h-full object-cover"
                 />
