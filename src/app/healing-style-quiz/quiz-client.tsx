@@ -16,8 +16,44 @@ import { IMAGES } from "@/lib/constants";
 
 type Stage = "intro" | "quiz" | "email" | "result";
 
+interface ShuffledOption {
+  id: string;
+  text: string;
+  style: HealingStyle;
+}
+
+interface ShuffledQuestion {
+  id: number;
+  question: string;
+  options: ShuffledOption[];
+}
+
+function fisherYatesShuffle<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function buildShuffledQuestions(): ShuffledQuestion[] {
+  return QUIZ_QUESTIONS.map((q) => ({
+    id: q.id,
+    question: q.question,
+    options: fisherYatesShuffle(
+      q.options.map((opt) => ({
+        id: `${q.id}-${opt.style}-${opt.text.slice(0, 10)}`,
+        text: opt.text,
+        style: opt.style,
+      }))
+    ),
+  }));
+}
+
 export function HealingStyleQuiz() {
   const [stage, setStage] = useState<Stage>("intro");
+  const [shuffledQuestions, setShuffledQuestions] = useState<ShuffledQuestion[]>(buildShuffledQuestions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<HealingStyle[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -28,6 +64,7 @@ export function HealingStyleQuiz() {
   const [emailError, setEmailError] = useState("");
 
   function startQuiz() {
+    setShuffledQuestions(buildShuffledQuestions());
     setStage("quiz");
     setCurrentQuestion(0);
     setAnswers([]);
@@ -45,7 +82,7 @@ export function HealingStyleQuiz() {
       setAnswers(newAnswers);
       setSelectedOption(null);
 
-      if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
+      if (currentQuestion < shuffledQuestions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
         const finalResult = calculateResult(newAnswers);
@@ -210,8 +247,8 @@ export function HealingStyleQuiz() {
   // QUIZ QUESTIONS
   // ================================================================
   if (stage === "quiz") {
-    const question = QUIZ_QUESTIONS[currentQuestion];
-    const progress = ((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100;
+    const question = shuffledQuestions[currentQuestion];
+    const progress = ((currentQuestion + 1) / shuffledQuestions.length) * 100;
 
     return (
       <div className="min-h-[85vh] flex flex-col bg-warm-50">
@@ -227,7 +264,7 @@ export function HealingStyleQuiz() {
                 <ArrowLeft className="h-4 w-4" /> Back
               </button>
               <span className="text-sm text-warm-400 font-[family-name:var(--font-body)]">
-                Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
+                Question {currentQuestion + 1} of {shuffledQuestions.length}
               </span>
             </div>
             <div className="w-full h-2 bg-warm-100 rounded-full overflow-hidden">
@@ -246,9 +283,11 @@ export function HealingStyleQuiz() {
               {question.question}
             </h2>
             <div className="mt-8 space-y-3">
-              {question.options.map((option, index) => (
+              {question.options.map((option, index) => {
+                const label = String.fromCharCode(65 + index);
+                return (
                 <button
-                  key={index}
+                  key={option.id}
                   onClick={() => selectAnswer(option.style, index)}
                   disabled={selectedOption !== null}
                   className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 font-[family-name:var(--font-body)] ${
@@ -268,7 +307,7 @@ export function HealingStyleQuiz() {
                       {selectedOption === index ? (
                         <Check className="h-4 w-4" />
                       ) : (
-                        option.label
+                        label
                       )}
                     </span>
                     <span className="text-warm-700 leading-relaxed pt-1">
@@ -276,7 +315,8 @@ export function HealingStyleQuiz() {
                     </span>
                   </div>
                 </button>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
