@@ -193,32 +193,28 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Photo Gallery */}
+      {/* Videos */}
       <Section variant="default" size="md">
         <AnimateOnScroll animation="fade-up">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { src: IMAGES.eventRoom, alt: "Conference ballroom event" },
-              { src: IMAGES.eventWorkshop, alt: "Workshop with women" },
-              { src: IMAGES.jazmineShameTalk, alt: "Jazmine presenting on overcoming shame" },
-              { src: IMAGES.eventWomenMeeting, alt: "Women at OvercomeHER meeting" },
-              { src: IMAGES.jazmineSpeakingBlue, alt: "Jazmine speaking at event" },
-              { src: IMAGES.womenEmbrace, alt: "Women embracing" },
-              { src: IMAGES.womenCircle, alt: "Women in circle gathering" },
-            ].map((photo, index) => (
-              <div
-                key={index}
-                className="relative aspect-square rounded-2xl overflow-hidden"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </div>
-            ))}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="aspect-[9/16] md:aspect-video rounded-2xl overflow-hidden shadow-md">
+              <iframe
+                src="https://www.youtube.com/embed/JKfwDnV_k90"
+                title="OvercomeHER — Jazmine Marie"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+            <div className="aspect-video rounded-2xl overflow-hidden shadow-md">
+              <iframe
+                src="https://www.youtube.com/embed/h-mw5Qb0Oyc"
+                title="OvercomeHER — Jazmine Marie"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
           </div>
         </AnimateOnScroll>
       </Section>

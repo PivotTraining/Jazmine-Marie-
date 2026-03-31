@@ -220,7 +220,13 @@ export const IMAGES = {
   jazmineShameTalk: "/images/jazmine-shame-talk.jpg",
   jazmineHosting: "/images/jazmine-hosting.jpg",
   jazmineWithGuest: "/images/jazmine-with-guest.jpg",
-  // Community & events
+  // Speaking event photos (full-res from Google Drive)
+  speakingEvent1: "/images/speaking-event-1.jpg",
+  speakingEvent2: "/images/speaking-event-2.jpg",
+  speakingEvent3: "/images/speaking-event-3.jpg",
+  speakingEvent4: "/images/speaking-event-4.jpg",
+  speakingEvent5: "/images/speaking-event-5.jpg",
+  speakingEvent6: "/images/speaking-event-6.jpg",
   communityTestimonial1: "/images/community-1.jpg",
   communityTestimonial2: "/images/community-2.jpg",
   communityCelebration: "/images/community-3.jpg",
