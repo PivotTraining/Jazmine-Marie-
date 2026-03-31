@@ -77,8 +77,8 @@ export default function SpeakingPage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl order-2 lg:order-1">
             <Image
-              src={IMAGES.jazmineSpeakingRed}
-              alt="Jazmine Marie speaking in red dress"
+              src={IMAGES.jazmineSpeakingHero}
+              alt="Jazmine Marie hosting Galentine's Dinner Party"
               width={600}
               height={750}
               className="w-full h-full object-cover"
