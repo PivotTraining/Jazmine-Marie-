@@ -50,7 +50,7 @@ export function Header() {
               href="/healing-style-quiz"
               className="px-4 py-2 rounded-full text-sm font-medium bg-pink-500 text-white hover:bg-pink-600 transition-colors font-[family-name:var(--font-body)] whitespace-nowrap"
             >
-              Take the Quiz
+              Take the Healing Style Quiz
             </Link>
             <Link
               href="/login"
@@ -99,7 +99,7 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
               className="block mt-2 px-4 py-3 rounded-lg text-base font-medium bg-pink-500 text-white text-center hover:bg-pink-600 transition-colors font-[family-name:var(--font-body)]"
             >
-              Take the Quiz
+              Take the Healing Style Quiz
             </Link>
             <Link
               href="/login"
