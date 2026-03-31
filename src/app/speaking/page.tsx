@@ -173,8 +173,8 @@ export default function SpeakingPage() {
           {[
             { src: IMAGES.speakingEvent1, alt: "Jazmine hosting Valentine's event with heart balloons", position: "center", tall: false },
             { src: IMAGES.speakingEvent2, alt: "Jazmine speaking in hot pink with women laughing", position: "center", tall: false },
-            { src: IMAGES.speakingEvent3, alt: "Jazmine speaking with mic in white blouse", position: "center", tall: false },
             { src: IMAGES.speakingEvent4, alt: "Jazmine presenting Overcoming Shame to become an OvercomeHER", position: "center", tall: false },
+            { src: IMAGES.speakingEvent3, alt: "Jazmine speaking with mic in white blouse", position: "center", tall: false },
             { src: IMAGES.speakingEvent5, alt: "Jazmine on stage in white dress with hand raised", position: "center", tall: true },
             { src: IMAGES.speakingEvent6, alt: "Jazmine speaking at PIVOT event with hand raised", position: "center", tall: true },
           ].map((img) => (
