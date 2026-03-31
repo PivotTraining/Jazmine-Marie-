@@ -171,12 +171,12 @@ export default function SpeakingPage() {
       <Section variant="warm" size="md">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {[
-            { src: IMAGES.speakingEvent1, alt: "Jazmine hosting Valentine's event with heart balloons" },
-            { src: IMAGES.speakingEvent2, alt: "Jazmine leading a conference room full of women" },
-            { src: IMAGES.speakingEvent3, alt: "Jazmine speaking with mic in white blouse" },
-            { src: IMAGES.speakingEvent4, alt: "Jazmine presenting Overcoming Shame to become an OvercomeHER" },
-            { src: IMAGES.speakingEvent5, alt: "Jazmine on stage in white dress with hand raised" },
-            { src: IMAGES.speakingEvent6, alt: "Jazmine speaking at PIVOT event with hand raised" },
+            { src: IMAGES.speakingEvent1, alt: "Jazmine hosting Valentine's event with heart balloons", position: "center" },
+            { src: IMAGES.speakingEvent2, alt: "Jazmine speaking in hot pink with women laughing", position: "center" },
+            { src: IMAGES.speakingEvent3, alt: "Jazmine speaking with mic in white blouse", position: "center" },
+            { src: IMAGES.speakingEvent4, alt: "Jazmine presenting Overcoming Shame to become an OvercomeHER", position: "center" },
+            { src: IMAGES.speakingEvent5, alt: "Jazmine on stage in white dress with hand raised", position: "top" },
+            { src: IMAGES.speakingEvent6, alt: "Jazmine speaking at PIVOT event with hand raised", position: "top" },
           ].map((img) => (
             <div
               key={img.alt}
@@ -187,7 +187,9 @@ export default function SpeakingPage() {
                 alt={img.alt}
                 width={600}
                 height={340}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                className={`w-full h-full object-cover hover:scale-105 transition-transform duration-500 ${
+                  img.position === "top" ? "object-top" : "object-center"
+                }`}
               />
             </div>
           ))}

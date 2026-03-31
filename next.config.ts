@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: blob: https: http:",
             "connect-src 'self' https://*.supabase.co https://api.stripe.com wss://*.supabase.co",
-            "frame-src https://js.stripe.com https://accounts.google.com https://www.facebook.com",
+            "frame-src https://js.stripe.com https://accounts.google.com https://www.facebook.com https://www.youtube.com https://youtube.com",
           ].join("; "),
         },
       ],
