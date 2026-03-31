@@ -55,8 +55,8 @@ export default function HomePage() {
             <div className="hidden lg:block">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src={IMAGES.jazmineJournaling}
-                  alt="Jazmine Marie — Speaker and Healing Advocate"
+                  src={IMAGES.jazmineHero}
+                  alt="Jazmine Marie — Host, Speaker, and Healing Advocate"
                   fill
                   className="object-cover"
                   priority
