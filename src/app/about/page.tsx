@@ -51,43 +51,76 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story */}
+      {/* Why I Created OvercomeHER */}
       <Section variant="default" size="lg">
         <AnimateOnScroll animation="fade-up">
           <div className="max-w-3xl mx-auto">
-            <div className="prose prose-lg font-[family-name:var(--font-body)] text-warm-600 leading-relaxed space-y-6">
+            <h2 className="text-3xl md:text-4xl font-semibold text-warm-900 mb-8">
+              Why I Created OvercomeHER
+            </h2>
+            <div className="font-[family-name:var(--font-body)] text-warm-600 leading-relaxed text-lg space-y-6">
+              <p>I created OvercomeHER because I am her.</p>
               <p>
-                I created OvercomeHER Circle because I am her. The woman who looked
-                strong on the outside but was carrying way too much alone. The one who
-                knew healing mattered — but didn&apos;t always have the structure, the
-                support, or the safe space to make it happen.
+                The woman who looked strong on the outside&hellip;<br />
+                but was carrying more than she ever said out loud.
               </p>
               <p>
-                I&apos;ve spent years doing the inner work, studying healing, leading
-                women, and creating spaces that don&apos;t just feel good — they create
-                change. And what I&apos;ve learned is this: You don&apos;t need to hustle
-                your way to healing. You don&apos;t need to do it all by yourself. You
-                just need a space that holds you while you grow.
+                The one who knew healing mattered&mdash;<br />
+                but didn&apos;t always have the space, the language, or the support to actually do it.
               </p>
               <p>
-                That&apos;s what OvercomeHER is. A space for accountability, clarity,
-                sisterhood, and softness — all in one. I&apos;m still on this journey
-                too. But I&apos;m not walking it alone anymore — and you don&apos;t have
-                to either.
+                I&apos;ve had to face my own patterns.<br />
+                My own beliefs.<br />
+                The parts of me that were shaped by things I didn&apos;t fully understand at the time.
+              </p>
+              <p>And through that process, I realized something:</p>
+              <p>
+                A lot of what we carry&hellip;<br />
+                we were never meant to carry alone.
               </p>
               <p>
-                Jazmine Marie Davis is an educator, mentor, and emotional wellness
-                advocate with a Bachelor&apos;s in Human Development and Family Science
-                and a Master&apos;s in Education focused on Culturally Relevant Pedagogy.
-                She is the founder of OvercomeHER, a healing-centered women&apos;s
-                community, and co-founder of PIVOT, a mental wellness training company.
+                OvercomeHER was created to be the kind of space I needed.<br />
+                A space where women can be honest about where they are,<br />
+                begin to understand themselves more deeply,<br />
+                and do the work that leads to real, lasting growth.
               </p>
               <p>
-                As a mom of three, Jazmine is passionate about creating safe spaces for
-                women to develop confidence, character, and wholeness. She specializes
-                in identity, emotional intelligence, boundaries, and self-care — and has
-                led impactful sessions in schools, nonprofits, and corporate spaces.
+                Not perfectly.<br />
+                But intentionally.
               </p>
+              <p>
+                I&apos;m still on that journey too.<br />
+                But I&apos;ve learned that healing doesn&apos;t require you to have it all together&mdash;<br />
+                it just requires you to be willing.
+              </p>
+              <p>And you don&apos;t have to do it by yourself.</p>
+            </div>
+
+            <div className="mt-16 pt-16 border-t border-warm-200">
+              <h2 className="text-3xl md:text-4xl font-semibold text-warm-900 mb-8">
+                About Jazmine
+              </h2>
+              <div className="font-[family-name:var(--font-body)] text-warm-600 leading-relaxed text-lg space-y-6">
+                <p>
+                  Jazmine Marie Davis is an educator, mentor, and emotional wellness advocate who is deeply committed to helping women become more whole.
+                </p>
+                <p>
+                  She holds a Bachelor&apos;s degree in Human Development and Family Science and a Master&apos;s in Education with a focus on Culturally Relevant Pedagogy.
+                </p>
+                <p>
+                  She is the founder of OvercomeHER, a healing-centered women&apos;s community, and co-founder of PIVOT, a mental wellness training company that serves schools, organizations, and communities.
+                </p>
+                <p>
+                  As a mother of three, Jazmine understands the weight women carry&mdash;and the importance of doing the inner work, not just for themselves, but for the lives they impact.
+                </p>
+                <p>
+                  Her work focuses on identity, emotional intelligence, boundaries, and self-awareness, helping women recognize their patterns, shift their thinking, and grow into stronger, more grounded versions of themselves.
+                </p>
+                <p>
+                  Through speaking, teaching, and community, Jazmine creates spaces that don&apos;t just feel good in the moment&mdash;<br />
+                  they challenge, support, and lead to real change.
+                </p>
+              </div>
             </div>
           </div>
         </AnimateOnScroll>
