@@ -222,6 +222,7 @@ export const IMAGES = {
   communityTestimonial1: "/images/community-1.jpg",
   communityTestimonial2: "/images/community-2.jpg",
   communityCelebration: "/images/community-3.jpg",
+  communitySisterhood: "/images/community-4.jpg",
   womenCircle: "/images/women-circle.jpg",
   womenEmbrace: "/images/women-embrace.jpg",
   eventRoom: "/images/event-room.jpg",

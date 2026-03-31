@@ -219,8 +219,8 @@ export default function HomePage() {
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={IMAGES.jazmineHero}
-                  alt="Jazmine Marie"
+                  src={IMAGES.communitySisterhood}
+                  alt="Women laughing together — sisterhood"
                   width={400}
                   height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
