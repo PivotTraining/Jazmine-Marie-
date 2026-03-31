@@ -4,13 +4,9 @@ import { Footer } from "@/components/layout/footer";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
-// Google Fonts will load in production on Vercel.
-// In local/sandbox builds without internet, the CSS variables
-// fall back to the system font stacks defined in globals.css.
 let fontClasses = "";
 try {
-  // Dynamic import to avoid build failure when fonts can't be fetched
-  const { Cormorant_Garamond, DM_Sans } = require("next/font/google");
+  const { Cormorant_Garamond, DM_Sans, Dancing_Script } = require("next/font/google");
   const cormorant = Cormorant_Garamond({
     variable: "--font-cormorant",
     subsets: ["latin"],
@@ -23,7 +19,13 @@ try {
     weight: ["300", "400", "500", "600", "700"],
     display: "swap",
   });
-  fontClasses = `${cormorant.variable} ${dmSans.variable}`;
+  const dancingScript = Dancing_Script({
+    variable: "--font-script",
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+    display: "swap",
+  });
+  fontClasses = `${cormorant.variable} ${dmSans.variable} ${dancingScript.variable}`;
 } catch {
   // Fonts unavailable — use system fallbacks
 }
@@ -65,6 +67,9 @@ export default function RootLayout({
         ["--font-dm-sans" as string]: fontClasses
           ? undefined
           : "'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
+        ["--font-script" as string]: fontClasses
+          ? undefined
+          : "'Brush Script MT', 'Segoe Script', cursive",
       }}
     >
       <body className="min-h-full flex flex-col antialiased">

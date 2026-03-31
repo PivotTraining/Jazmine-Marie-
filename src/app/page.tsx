@@ -21,12 +21,13 @@ export default function HomePage() {
       {/* ========== HERO ========== */}
       <section className="relative overflow-hidden bg-warm-50">
         <div className="absolute inset-0 bg-gradient-to-br from-blush-50/60 via-transparent to-plum-50/30" />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-6 pt-10 pb-24 md:pt-14 md:pb-32 lg:pt-16 lg:pb-40 lg:px-8">
+          {/* Handwritten greeting */}
+          <p className="text-5xl md:text-6xl lg:text-7xl text-pink-500 font-[family-name:var(--font-script)] mb-10 md:mb-14">
+            Hey sis, you belong here.
+          </p>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-3xl md:text-4xl italic text-pink-500 font-[family-name:var(--font-sans)] mb-2">
-                Hey sis, you belong here.
-              </p>
               <p className="text-sm uppercase tracking-[0.25em] text-blush-500 font-[family-name:var(--font-body)] font-medium">
                 Host &middot; Speaker &middot; Healing Advocate
               </p>
