@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 280" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" fill="none">
   <!-- O Circle - positioned top right -->
-  <circle cx="380" cy="80" r="55" stroke="#E91E8C" stroke-width="28" fill="none"/>
+  <circle cx="460" cy="80" r="55" stroke="#E91E8C" stroke-width="28" fill="none"/>
   <!-- OvercomeHER text -->
   <text x="10" y="240" font-family="'Nunito', 'Varela Round', system-ui, sans-serif" font-weight="800" font-size="80" fill="#E91E8C">OvercomeHER</text>
 </svg>
