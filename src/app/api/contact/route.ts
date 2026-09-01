@@ -14,21 +14,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
     }
 
-    try {
-      const { getServerSupabase } = await import("@/lib/supabase");
-      const supabase = getServerSupabase();
-      await supabase.from("contact_messages").insert({
-        name,
-        email,
-        subject: subject || "",
-        message,
-      });
-    } catch {
-      console.log("Contact message received:", { name, email, subject, message });
+    const { getServerSupabase } = await import("@/lib/supabase");
+    const { error } = await getServerSupabase().from("contact_messages").insert({
+      name: String(name).trim(),
+      email: String(email).trim().toLowerCase(),
+      subject: subject ? String(subject).trim() : "",
+      message: String(message).trim(),
+    });
+
+    if (error) {
+      console.error("Contact message persistence failed", error);
+      return NextResponse.json({ error: "We couldn't send your message. Please try again." }, { status: 503 });
     }
 
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
+  } catch (error) {
+    console.error("Contact form failed", error);
+    return NextResponse.json({ error: "We couldn't send your message. Please try again." }, { status: 500 });
   }
 }
