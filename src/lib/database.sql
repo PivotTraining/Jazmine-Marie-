@@ -36,10 +36,11 @@ alter table public.tiers enable row level security;
 create policy "Tiers are viewable by everyone" on public.tiers for select using (true);
 
 -- Seed tiers
+-- Prices are stored in cents to avoid floating-point rounding on money.
 insert into public.tiers (id, name, slug, description, price_monthly, price_yearly, features, sort_order) values
-  ('bloom', 'Bloom', 'bloom', 'Where your healing journey begins', 19, 190, '["Welcome Room access", "Monthly Theme Room", "Prayer & Encouragement Room", "Announcements & community updates", "Monthly group gathering (virtual)", "Curated resource library (starter)"]', 1),
-  ('rooted', 'Rooted', 'rooted', 'Go deeper. Grow stronger.', 39, 390, '["Everything in Bloom, plus:", "Journaling & Reflection Room", "Healing Conversations Room", "Book Club / Devotional Room", "Teaching replay library (full access)", "Monthly live workshop or teaching", "Moms / Marriage / Womanhood room", "Priority event access"]', 2),
-  ('whole', 'Whole', 'whole', 'Step fully into who you were made to be', 79, 790, '["Everything in Rooted, plus:", "Small-group mentorship sessions", "Quarterly 1-on-1 check-in with Jazmine", "Exclusive Whole-tier events & retreats info", "Early access to all new content", "Private accountability partnerships", "Full resource & workshop archive", "VIP access to live events"]', 3);
+  ('nurturher', 'NurturHER', 'nurturher', 'A gentle, self-paced entry into your healing journey', 1997, 19900, '["Monthly healing theme + journaling prompts", "Access to community support spaces", "Guided challenges for building habits", "Entry to the ReadHER Book Club", "Monthly group gathering (virtual)"]', 1),
+  ('transformher', 'TransformHER', 'transformher', 'For the woman who''s doing the work and ready for more', 4797, 47900, '["Everything in NurturHER, plus:", "Monthly Live Community Sessions", "Guided group reflection + intentional conversation", "Weekly journal prompts + accountability check-ins", "Integration activities + practice space", "Priority event access"]', 2),
+  ('ascendher', 'AscendHER', 'ascendher', 'High-touch coaching, deep transformation, intimate access', 9700, 97000, '["Everything in TransformHER, plus:", "Live Coaching with Jazmine + Chris Marvel", "Private coaching community for direct support", "Hot seat coaching + Q&A sessions", "Exclusive Deep Work exercises & assignments", "VIP access to live events"]', 3);
 
 -- Memberships
 create table public.memberships (
@@ -70,6 +71,19 @@ create table public.rooms (
 
 alter table public.rooms enable row level security;
 create policy "Rooms are viewable by authenticated users" on public.rooms for select using (auth.role() = 'authenticated');
+
+-- Seed rooms (must match COMMUNITY_ROOMS in src/lib/constants.ts)
+insert into public.rooms (name, slug, description, type, tier_required, icon, sort_order) values
+  ('Welcome Room', 'welcome', 'Introduce yourself and get welcomed into the community.', 'discussion', 'nurturher', 'Heart', 1),
+  ('Monthly Theme', 'monthly-theme', 'Each month we explore a new healing or growth theme together.', 'discussion', 'nurturher', 'Sparkles', 2),
+  ('Prayer & Encouragement', 'prayer-encouragement', 'A sacred space to share prayer requests and uplift one another.', 'discussion', 'nurturher', 'HandHeart', 3),
+  ('ReadHER Book Club', 'book-club', 'Monthly reads and devotional studies for soul-deep growth.', 'discussion', 'nurturher', 'BookMarked', 4),
+  ('Journaling & Reflection', 'journaling', 'Guided prompts and space for deep personal reflection.', 'discussion', 'transformher', 'BookOpen', 5),
+  ('Healing Conversations', 'healing-conversations', 'Real talk about real healing — shame, guilt, identity, and becoming.', 'discussion', 'transformher', 'MessageCircle', 6),
+  ('Teaching Replays', 'replays', 'Full library of past workshops, teachings, and live session recordings.', 'library', 'transformher', 'Play', 7),
+  ('Moms, Marriage & Womanhood', 'moms-marriage-womanhood', 'For the woman navigating motherhood, marriage, and identity.', 'discussion', 'transformher', 'Users', 8),
+  ('Announcements', 'announcements', 'Community news, upcoming events, and important updates.', 'announcement', 'nurturher', 'Megaphone', 9),
+  ('Events & Live Sessions', 'events', 'Upcoming live gatherings, workshops, and special events.', 'events', 'nurturher', 'Calendar', 10);
 
 -- Posts
 create table public.posts (
