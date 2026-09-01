@@ -4,7 +4,7 @@ import { HealingStyleQuiz } from "./quiz-client";
 export const metadata: Metadata = {
   title: "Discover Your Healing Style — OvercomeHER",
   description:
-    "Take the free Healing Style Quiz to discover how you heal, what you need, and which OvercomeHER Circle tier is right for you.",
+    "Take the free Healing Style Quiz to explore how you tend to process difficult experiences, stress, and personal growth, with practical next steps from OvercomeHER.",
 };
 
 export default function QuizPage() {
