@@ -5,12 +5,16 @@ import {
   Play,
   FileText,
   Headphones,
-  Download,
   Search,
-  Filter,
   Lock,
 } from "lucide-react";
 import { Section } from "@/components/ui/section";
+import { getCurrentUser, getCurrentMembership, tierAllows } from "@/lib/auth";
+import { MEMBERSHIP_TIERS } from "@/lib/constants";
+
+// Member-specific content: never statically cache this page, or one
+// member's dashboard could be served to another.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Resource Library — OvercomeHER Circle",
@@ -89,7 +93,15 @@ const typeIcons: Record<string, React.ElementType> = {
   audio: Headphones,
 };
 
-export default function LibraryPage() {
+function tierLabel(tierId: string): string {
+  return MEMBERSHIP_TIERS.find((t) => t.id === tierId)?.name ?? tierId;
+}
+
+export default async function LibraryPage() {
+  const user = await getCurrentUser();
+  const membership = user ? await getCurrentMembership(user.id) : null;
+  const activeTierId = membership?.tierId ?? "transformher";
+
   return (
     <>
       <section className="bg-warm-800">
@@ -134,7 +146,7 @@ export default function LibraryPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {resources.map((resource) => {
             const Icon = typeIcons[resource.type] || FileText;
-            const accessible = resource.tier !== "ascendher"; // Demo: TransformHER user
+            const accessible = tierAllows(activeTierId, resource.tier);
             return (
               <div
                 key={resource.title}
@@ -180,7 +192,7 @@ export default function LibraryPage() {
                 </div>
                 {!accessible && (
                   <p className="mt-3 text-xs text-plum-400 font-[family-name:var(--font-body)]">
-                    Upgrade to AscendHER to access
+                    Upgrade to {tierLabel(resource.tier)} to access
                   </p>
                 )}
               </div>

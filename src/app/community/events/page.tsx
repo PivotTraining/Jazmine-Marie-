@@ -3,41 +3,21 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Users, Play, MapPin } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { getUpcomingEvents } from "@/lib/community-data";
+import { MEMBERSHIP_TIERS } from "@/lib/constants";
+
+// Member-specific content: never statically cache this page, or one
+// member's dashboard could be served to another.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Events — OvercomeHER Circle",
   description: "Upcoming and past events in the OvercomeHER Circle community.",
 };
 
-const upcomingEvents = [
-  {
-    title: "Monthly Gathering: The Art of Letting Go",
-    date: "April 12, 2026",
-    time: "7:00 PM EST",
-    type: "Live Workshop",
-    tier: "All tiers",
-    description: "This month we explore what it means to release — the guilt, the control, the old stories. Join Jazmine for an intimate evening of teaching, journaling, and prayer.",
-    attendees: 87,
-  },
-  {
-    title: "Book Club: Chapter 4-6 Discussion",
-    date: "April 18, 2026",
-    time: "8:00 PM EST",
-    type: "Book Club",
-    tier: "TransformHER+",
-    description: "We're reading through our current selection together. Come ready to share what's resonating and what's challenging you.",
-    attendees: 34,
-  },
-  {
-    title: "Healing Circle: Processing Grief & Loss",
-    date: "April 25, 2026",
-    time: "6:30 PM EST",
-    type: "Small Group",
-    tier: "AscendHER",
-    description: "An intimate, facilitated space for processing grief and loss. Limited to 12 women for deep, personal conversation.",
-    attendees: 10,
-  },
-];
+function tierLabel(tierId: string): string {
+  return MEMBERSHIP_TIERS.find((t) => t.id === tierId)?.name ?? tierId;
+}
 
 const pastEvents = [
   {
@@ -60,7 +40,9 @@ const pastEvents = [
   },
 ];
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const upcomingEvents = await getUpcomingEvents();
+
   return (
     <>
       <section className="bg-warm-800">
@@ -81,10 +63,18 @@ export default function EventsPage() {
       {/* Upcoming */}
       <Section variant="warm" size="md">
         <h2 className="text-2xl font-semibold text-warm-800 mb-6">Upcoming Events</h2>
+        {upcomingEvents.length === 0 && (
+          <div className="p-8 rounded-2xl bg-white border border-warm-100 text-center">
+            <Calendar className="h-10 w-10 text-warm-300 mx-auto mb-3" />
+            <p className="text-warm-500 font-[family-name:var(--font-body)]">
+              No events scheduled right now. Check back soon.
+            </p>
+          </div>
+        )}
         <div className="space-y-6">
           {upcomingEvents.map((event) => (
             <div
-              key={event.title}
+              key={event.id}
               className="p-6 md:p-8 rounded-2xl bg-white border border-warm-100 hover:shadow-md transition-all"
             >
               <div className="flex flex-col md:flex-row md:items-start gap-6">
@@ -100,7 +90,7 @@ export default function EventsPage() {
                       {event.type}
                     </span>
                     <span className="text-xs text-warm-400 font-[family-name:var(--font-body)]">
-                      {event.tier}
+                      {tierLabel(event.tierRequired)}
                     </span>
                   </div>
                   <h3 className="text-xl font-semibold text-warm-800">{event.title}</h3>
@@ -110,9 +100,6 @@ export default function EventsPage() {
                   <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-warm-400 font-[family-name:var(--font-body)]">
                     <span className="flex items-center gap-1.5">
                       <Clock className="h-4 w-4" /> {event.time}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Users className="h-4 w-4" /> {event.attendees} attending
                     </span>
                     <span className="flex items-center gap-1.5">
                       <MapPin className="h-4 w-4" /> Virtual (Zoom)
