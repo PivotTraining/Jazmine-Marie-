@@ -77,8 +77,8 @@ export default function SpeakingPage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl order-2 lg:order-1">
             <Image
-              src={IMAGES.jazmineSpeakingHero}
-              alt="Jazmine Marie hosting Galentine's Dinner Party"
+              src={IMAGES.speakingEvent5}
+              alt="Jazmine Marie speaking on stage"
               width={600}
               height={750}
               className="w-full h-full object-cover"
@@ -175,7 +175,7 @@ export default function SpeakingPage() {
             { src: IMAGES.speakingEvent2, alt: "Jazmine speaking in hot pink with women laughing", position: "center", tall: false },
             { src: IMAGES.speakingEvent4, alt: "Jazmine presenting Overcoming Shame to become an OvercomeHER", position: "center", tall: false },
             { src: IMAGES.speakingEvent3, alt: "Jazmine speaking with mic in white blouse", position: "center", tall: false },
-            { src: IMAGES.speakingEvent5, alt: "Jazmine on stage in white dress with hand raised", position: "center", tall: true },
+            { src: IMAGES.jazmineSpeakerCta, alt: "Jazmine speaking in hot pink on stage", position: "center", tall: false },
             { src: IMAGES.speakingEvent6, alt: "Jazmine speaking at PIVOT event with hand raised", position: "center", tall: true },
           ].map((img) => (
             <div

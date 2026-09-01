@@ -199,41 +199,28 @@ export const SOCIAL_LINKS = {
   overcomeher_ig: "https://instagram.com/IAMANOVERCOMEHER",
 } as const;
 
+// All images below are full-resolution. Low-res Canva thumbnails have been
+// removed — if a new photo is added, keep it at 1200px wide or larger.
 export const IMAGES = {
+  // Logo (vector — scales cleanly at any size)
   overcomeherLogo: "/images/overcomeher-logo-pink.svg",
   overcomeherLogoAlt: "/images/overcomeher-logo-pink.svg",
   pinkBrushLogo: "/images/overcomeher-logo-pink.svg",
-  // Jazmine portraits & headshots
-  jazmineHero: "/images/jazmine-hero-new.jpg",
-  jazmineAboutHero: "/images/jazmine-about-hero.jpg",
-  jazmineJournaling: "/images/jazmine-journaling.png",
-  jazmineLaptopRed: "/images/jazmine-laptop-red.jpg",
-  jazmineGodTee: "/images/jazmine-god-tee.jpg",
-  jazmineTealWall: "/images/jazmine-teal-wall.jpg",
-  jazmineBookClub: "/images/jazmine-book-club.jpg",
-  // Jazmine speaking & hosting
-  jazmineSpeakingHero: "/images/jazmine-speaking-hero.jpg",
-  jazmineSpeakerCta: "/images/jazmine-speaker-cta.jpg",
-  jazmineSpeakingRed: "/images/jazmine-speaking-red.jpg",
-  jazmineSpeakingBlue: "/images/jazmine-speaking-blue.jpg",
-  jazmineSpeakingMic: "/images/jazmine-speaking-mic.jpg",
-  jazmineShameTalk: "/images/jazmine-shame-talk.jpg",
-  jazmineHosting: "/images/jazmine-hosting.jpg",
-  jazmineWithGuest: "/images/jazmine-with-guest.jpg",
-  // Speaking event photos (full-res from Google Drive)
-  speakingEvent1: "/images/speaking-event-1.jpg",
-  speakingEvent2: "/images/speaking-event-2.jpg",
-  speakingEvent3: "/images/speaking-event-3.jpg",
-  speakingEvent4: "/images/speaking-event-4.jpg",
-  speakingEvent5: "/images/speaking-event-5.jpg",
-  speakingEvent6: "/images/speaking-event-6.jpg",
-  communityTestimonial1: "/images/community-1.jpg",
-  communityTestimonial2: "/images/community-2.jpg",
-  communityCelebration: "/images/community-3.jpg",
-  communitySisterhood: "/images/community-4.jpg",
-  womenCircle: "/images/women-circle.jpg",
-  womenEmbrace: "/images/women-embrace.jpg",
-  eventRoom: "/images/event-room.jpg",
-  eventWorkshop: "/images/event-workshop.jpg",
-  eventWomenMeeting: "/images/event-women-meeting.jpg",
+
+  // Jazmine portraits
+  jazmineHero: "/images/jazmine-hero-new.jpg", // 1566x2008 — homepage hero
+  jazmineAboutHero: "/images/jazmine-about-hero.jpg", // 896x1195 — about hero
+  jazmineSpeakerCta: "/images/jazmine-speaker-cta.jpg", // 1620x1080 — hot pink, mic
+
+  // Speaking & event photos
+  speakingEvent1: "/images/speaking-event-1.jpg", // 2304x1536
+  speakingEvent2: "/images/speaking-event-2.jpg", // 1620x1080
+  speakingEvent3: "/images/speaking-event-3.jpg", // 3000x2000
+  speakingEvent4: "/images/speaking-event-4.jpg", // 5184x3456
+  speakingEvent5: "/images/speaking-event-5.jpg", // 4016x6016 (portrait)
+  speakingEvent6: "/images/speaking-event-6.jpg", // 2624x3936 (portrait)
+
+  // Community
+  communityCelebration: "/images/community-3.jpg", // 1000x661
+  communitySisterhood: "/images/community-4.jpg", // 388x257 — TODO: needs higher-res original
 } as const;
