@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { triggerQuizNurture } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,13 +17,15 @@ export async function POST(request: NextRequest) {
 
     const source = request.headers.get("referer") || "direct";
     const normalizedEmail = String(email).trim().toLowerCase();
+    const normalizedFirstName = String(firstName).trim();
+    const normalizedResult = String(result).trim();
     const { getServerSupabase } = await import("@/lib/supabase");
     const supabase = getServerSupabase();
 
     const { error: submissionError } = await supabase.from("quiz_submissions").insert({
-      first_name: String(firstName).trim(),
+      first_name: normalizedFirstName,
       email: normalizedEmail,
-      result,
+      result: normalizedResult,
       answers,
       scores,
       source,
@@ -42,7 +45,19 @@ export async function POST(request: NextRequest) {
       console.error("Quiz newsletter opt-in failed", subscriberError);
     }
 
-    return NextResponse.json({ success: true });
+    let nurtureQueued = false;
+    try {
+      await triggerQuizNurture({
+        email: normalizedEmail,
+        firstName: normalizedFirstName,
+        result: normalizedResult,
+      });
+      nurtureQueued = true;
+    } catch (nurtureError) {
+      console.error("Quiz nurture trigger failed", nurtureError);
+    }
+
+    return NextResponse.json({ success: true, nurtureQueued });
   } catch (error) {
     console.error("Quiz submission failed", error);
     return NextResponse.json({ error: "We couldn't save your results. Please try again." }, { status: 500 });
