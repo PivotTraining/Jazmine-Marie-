@@ -27,6 +27,15 @@ export function getLeadNotificationEmail() {
   return process.env.LEAD_NOTIFICATION_EMAIL?.trim() || "hello@jazminemarie.com";
 }
 
+export function escapeHtml(value: unknown) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 async function resendRequest(path: string, body: Record<string, unknown>) {
   const headers = getHeaders();
   if (!headers) {
@@ -60,7 +69,6 @@ export async function sendTransactionalEmail(input: {
   text: string;
   html: string;
   replyTo?: string;
-  idempotencyKey?: string;
 }) {
   return resendRequest("/emails", {
     from: getResendFrom(),
@@ -69,7 +77,6 @@ export async function sendTransactionalEmail(input: {
     text: input.text,
     html: input.html,
     ...(input.replyTo ? { reply_to: input.replyTo } : {}),
-    ...(input.idempotencyKey ? { headers: { "Idempotency-Key": input.idempotencyKey } } : {}),
   });
 }
 
